@@ -1,0 +1,310 @@
+@charset "utf-8";
+
+@font-face {
+  font-family: "Vkts";
+  src: url(../fonts/vtks-distress.woff);
+}
+
+* {
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: url(../images/body_back.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+header {
+  width: 100%;
+  height: 5em;
+  padding: 20px 0px 20px 0;
+  font-family: "vkts";
+  box-shadow: inset 0px 5px 5px black;
+
+  color: #f5deb3;
+  margin: 0;
+  background: rgb(55, 63, 39);
+}
+#icon {
+  float: left;
+  margin-top: 10px;
+  margin-left: 30px;
+}
+
+header h1 {
+  float: left;
+  font-size: 50px;
+  letter-spacing: 1.5px;
+  margin-top: 10px;
+  margin-left: 10px;
+  text-shadow: #cda3af 1px 1px;
+  text-shadow: 2px 2px #cda34f;
+}
+
+#guest {
+  float: right;
+  margin-right: 70px;
+  margin-top: 10px;
+}
+
+#border {
+  margin-top: -5px;
+  height: auto;
+  width: 100%;
+}
+
+nav {
+  position: fixed;
+  background: #df5b49;
+  height: 100%;
+  width: 0em;
+  top: 0;
+  left: 0;
+  transition: all 0.5s ease-in-out;
+  z-index: 8;
+}
+
+.social {
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  top: 10%;
+  left: 20%;
+}
+.social img {
+  margin-left: 20px;
+}
+
+nav ul {
+  position: relative;
+  font-size: 30px;
+  position: relative;
+  left: 20%;
+  top: 20%;
+}
+nav ul a {
+  color: wheat;
+}
+
+nav ul a li {
+  margin-bottom: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-shadow: 2px 2px #cda34f;
+}
+
+.nav-box {
+  display: none;
+}
+
+.res-btn {
+  display: block;
+  top: 12em;
+  left: 1em;
+  position: fixed;
+  z-index: 11;
+}
+.res-btn::after {
+  content: "";
+  background: white;
+  border: solid 0.5px wheat;
+  height: 10px;
+  width: 55px;
+  display: block;
+  margin-top: 2.5px;
+  transition: all 0.3s ease;
+}
+.res-btn span::after {
+  content: "";
+  background: white;
+  border: solid 0.5px wheat;
+  height: 10px;
+  width: 55px;
+  display: block;
+  margin-top: 2px;
+  transition: all 0.3s ease;
+}
+
+.res-btn::before {
+  content: "";
+  background: white;
+  border: solid 0.5px wheat;
+  height: 10px;
+  width: 55px;
+  display: block;
+  margin-top: 1px;
+  transition: all 0.3s ease;
+}
+
+#border2 {
+  transform: rotate(-90deg);
+  position: fixed;
+  left: -56em;
+  z-index: 10;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+.nav-box:checked ~ .res-btn::before {
+  transform: rotate(45deg);
+  background: wheat;
+}
+.nav-box:checked ~ .res-btn::after {
+  transform: translateY(-25px) rotate(-45deg);
+  background: wheat;
+}
+.nav-box:checked ~ .res-btn span::after {
+  opacity: 0;
+}
+.nav-box:checked ~ nav {
+  width: 25em;
+}
+.nav-box:checked ~ #border2 {
+  opacity: 1;
+}
+
+@media only screen and (max-width: 768px) {
+  header h1 {
+    font-size: 40px;
+    margin-top: 20px;
+  }
+
+  #icon {
+    height: 35px;
+    width: 35px;
+    margin-top: 27px;
+  }
+  #guest {
+    height: 40px;
+    width: 40px;
+    margin-right: 20px;
+    margin-top: 15px;
+  }
+  #border {
+    margin-top: 5px;
+  }
+  #border2 {
+    left: -58em;
+  }
+  .social {
+    display: flex;
+    flex-direction: column;
+    left: 45%;
+    top: 0;
+  }
+  .res-btn::after,
+  .res-btn span::after,
+  .res-btn::before {
+    height: 6px;
+    width: 45px;
+  }
+  .nav-box:checked ~ .res-btn::after {
+    transform: translateY(-18px) rotate(-45deg);
+  }
+
+  .social img {
+    height: 35px;
+    width: 35px;
+    margin-top: 30px;
+  }
+
+  nav ul {
+    font-size: 25px;
+    left: 10%;
+    top: 5%;
+  }
+
+  .nav-box:checked ~ nav {
+    width: 15em;
+  }
+
+  #greet {
+    font-size: 63px;
+    margin-left: 30px;
+  }
+
+  #mot {
+    font-size: 25px;
+    margin-left: 40px;
+  }
+
+  #post,
+  #look {
+    padding: 0.7em;
+    margin-left: 2em;
+    font-size: 35px;
+    margin-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width: 384px) {
+  #look {
+    position: relative;
+    top: 3em;
+  }
+  .nav-box:checked ~ nav {
+    width: 11em;
+  }
+
+  nav ul {
+    left: 1%;
+    font-size: 20px;
+    top: 10%;
+  }
+  #border2 {
+    left: -59em;
+  }
+}
+
+.body {
+  width: 100%;
+  height: 40em;
+  font-family: "vkts";
+  color: wheat;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.body h1 {
+  font-size: 80px;
+  margin-top: 2em;
+  text-shadow: 3px 3px #cda34f;
+  letter-spacing: 3px;
+}
+.body p {
+  font-size: 30px;
+  text-shadow: 2px 2px #cda34f;
+  letter-spacing: 2.5px;
+}
+
+.post {
+  margin-top: 5em;
+  margin-left: -2.5em;
+}
+
+.post a span {
+  color: whitesmoke;
+  font-size: 40px;
+  text-shadow: 3px 3px black;
+  border: 5px solid wheat;
+  padding: 1em;
+  transition: 0.3s all ease-in-out;
+  letter-spacing: 2px;
+  margin-left: 1em;
+}
+
+.post a span:hover {
+  box-shadow: inset -130px -130px wheat;
+}
+
+.blogs {
+  margin-top: 15em;
+}
