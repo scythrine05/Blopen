@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const { check, validationResult } = require("express-validator/check");
 const { matchedData, sanitized } = require("express-validator/filter");
 const mysql = require("mysql");
+const multer = require("multer");
 const session = require("express-session");
 // CREATE A CONNECTION
 
@@ -14,6 +15,17 @@ const connection = mysql.createConnection({
   password: "",
   user: "root",
   database: "Blopen"
+});
+//CREATE STORAGE FOR PICTURE STORAGE
+
+const storage = multer.diskStorage({
+  destination: "./public/images/uploaded",
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  }
 });
 
 //EXPRESS SESSION
@@ -46,7 +58,11 @@ app.get("/", (req, res) => {
   if (req.session.loggedin) {
     res.render("index", { title: "|Home|", user: req.session.user });
   } else {
-    res.render("silog", { title: "|Log/Sign|" });
+    res.render("silog", {
+      title: "|Log/Sign|",
+      cross: "images/Empty.png",
+      cross2: "images/Empty.png"
+    });
   }
 });
 //LOGIN
@@ -62,30 +78,47 @@ app.post(
       .isLength({ min: 8 })
   ],
   (req, res) => {
-    const errors = validationResult(req);
+    if (!req.session.loggedin) {
+      const errors = validationResult(req);
 
-    console.log(errors.mapped());
+      console.log(errors.mapped());
 
-    if (!errors.isEmpty()) {
-      res.send("NOT LOGINED");
-    } else {
-      var email = req.body.Lemail;
-      var pass = req.body.Lpass;
-      if (email && pass) {
-        var sql = "SELECT * FROM silog WHERE Email=? AND Password=?";
-        connection.query(sql, [email, pass], (error, results, fields) => {
-          if (results.length > 0) {
-            req.session.loggedin = true;
-            req.session.user = results[0].Name;
-            res.redirect("/");
-          } else {
-            res.send("NOT LOGGINED");
-          }
-          res.end();
+      if (!errors.isEmpty()) {
+        res.render("silog", {
+          title: "|Log/Sign|",
+          cross: "images/Empty.png",
+          cross2: "images/cross.png"
         });
       } else {
-        res.send("NOT LOGGINED");
+        var email = req.body.Lemail;
+        var pass = req.body.Lpass;
+        if (email && pass) {
+          var sql = "SELECT * FROM silog WHERE Email=? AND Password=?";
+          connection.query(sql, [email, pass], (error, results, fields) => {
+            if (results.length > 0) {
+              req.session.loggedin = true;
+              req.session.user = results[0].Name;
+              req.session.id = results[0].Id;
+              res.redirect("/");
+            } else {
+              res.render("silog", {
+                title: "|Log/Sign|",
+                cross: "images/Empty.png",
+                cross2: "images/cross.png"
+              });
+            }
+            res.end();
+          });
+        } else {
+          res.render("silog", {
+            title: "|Log/Sign|",
+            cross: "images/Empty.png",
+            cross2: "images/cross.png"
+          });
+        }
       }
+    } else {
+      res.redirect("/");
     }
   }
 );
@@ -95,33 +128,65 @@ app.post(
 app.post(
   "/signup",
   [
+    check("Sname", "Max should be 15")
+      .trim()
+      .isLength({ max: 15 }),
     check("Semail", "Invalid Email")
       .trim()
       .isEmail(),
     check("Spass", "Password minimum should be 8")
       .trim()
-      .isLength({ min: 8 })
+      .isLength({ min: 8 }),
+    check("Scpass").custom((value, { req }) => {
+      if (value != req.body.Spass) {
+        res.render("silog", {
+          title: "|Log/Sign|",
+          cross: "images/cross.png",
+          cross2: "images/Empty.png"
+        });
+        console.log("here2");
+      } else {
+        return true;
+      }
+    })
   ],
   (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      res.send("NOT SIGNED");
-    } else {
-      var sql = "INSERT INTO silog(Name,Password,Email) VALUES(?,?,?)";
-      connection.query(
-        sql,
-        [req.body.Sname, req.body.Spass, req.body.Semail],
-        (err, result, fields) => {
-          if (err) {
-          } else {
-            res.render("Profile_pic");
+    if (!req.session.loggedin) {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        res.render("silog", {
+          title: "|Log/Sign|",
+          cross: "images/cross.png",
+          cross2: "images/Empty.png"
+        });
+        console.log(errors.mapped());
+      } else {
+        var sql = "INSERT INTO silog(Name,Password,Email) VALUES(?,?,?)";
+        connection.query(
+          sql,
+          [req.body.Sname, req.body.Spass, req.body.Semail],
+          (err, result, fields) => {
+            if (err) {
+              res.render("silog", {
+                title: "|Log/Sign|",
+                cross: "images/cross.png",
+                cross2: "images/Empty.png"
+              });
+              console.log("here3");
+            } else {
+              res.redirect("/upload");
+            }
           }
-        }
-      );
+        );
+      }
+    } else {
+      res.redirect("/");
     }
   }
 );
-
+app.get("/upload", (req, res) => {
+  res.render("Profile_pic");
+});
 app.get("/logout", (req, res) => {
   if (req.session.loggedin) {
     req.session.loggedin = false;
