@@ -26,7 +26,6 @@ header {
   padding: 20px 0px 20px 0;
   font-family: "vkts";
   box-shadow: inset 0px 5px 5px black;
-
   color: #f5deb3;
   margin: 0;
   background: rgb(55, 63, 39);
@@ -34,7 +33,7 @@ header {
 #icon {
   float: left;
   margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 30px;
 }
 
 header h1 {
@@ -67,9 +66,102 @@ header h1 {
   #border {
     margin-top: 5px;
   }
+  .body {
+    flex-direction: column;
+  }
+
+  #log,
+  #sign {
+    margin-top: 10em;
+  }
+
+  #log,
+  #sign {
+    position: relative;
+    top: 10em;
+  }
+
+  #h1 {
+    white-space: nowrap;
+    font-size: 40px;
+  }
+  .body form input {
+    height: 3em;
+    width: 20em;
+    font-size: 14px;
+  }
+
+  .body form input::placeholder {
+    font-size: 14px;
+    font-family: "vkts";
+  }
 }
-section {
+
+.body {
   width: 100%;
+  height: 40em;
+  font-family: "vkts";
+  color: wheat;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 8em;
+}
+
+#log,
+#sign {
+  text-shadow: 2px 2px #cda34f;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  /* background: rgba(55, 63, 39, 0.7); */
+  background: rgba(223, 91, 73, 0.5);
   height: 30em;
-  background: red;
+  padding: 40px 5em;
+  margin: 30px 0px;
+  transition: all 0.5s ease-in-out;
+}
+#log {
+  box-shadow: 20px 20px 20px black;
+}
+#sign {
+  box-shadow: -20px 20px 20px black;
+}
+.body h1 {
+  font-size: 50px;
+}
+.body input {
+  height: 3em;
+  width: 20em;
+  font-size: 17px;
+  font-weight: bold;
+  color: wheat;
+  text-shadow: 1px 1px black;
+  background: rgba(255, 255, 255, 0.3);
+  border: 0p 0p 2px 0p solid wheat;
+  text-align: center;
+}
+
+.body input::placeholder {
+  font-size: 15px;
+  font-family: "vkts";
+  font-weight: lighter;
+  color: wheat;
+}
+
+.body button {
+  font-size: 15px;
+  font-family: "vkts";
+  width: 10em;
+  height: 4em;
+  border: 2px solid wheat;
+  transition: all 0.3s ease-in-out;
+  color: wheat;
+  cursor: pointer;
+  background: transparent;
+  text-shadow: 1px 1px black;
+  transform-style: preserve-3d;
+}
+.body button:hover {
+  box-shadow: inset 0px -60px wheat;
+  color: #df5b49;
 }

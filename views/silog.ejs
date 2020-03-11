@@ -6,7 +6,6 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="stylesheets/silog.css" type="text/css" />
   </head>
-
   <body>
     <header>
       <img
@@ -16,12 +15,54 @@
         width="50px"
         alt="icon"
       />
-      <h1>
-        Blopen
-      </h1>
+      <h1>Bl<font color="red">o</font>pen</h1>
       <img src="images/border.png" id="border" />
     </header>
-    <section></section>
+    <div class="body">
+      <form id="log" action="/login" method="POST">
+        <h1 id="h1">log<font color="red">In</font></h1>
+
+        <br />
+        <input
+          type="email"
+          name="Lemail"
+          placeholder="Email"
+          autocomplete="off"
+        /><br />
+        <input
+          type="password"
+          name="Lpass"
+          placeholder="Password"
+        /><br /><br /><button type="submit" id="Ssub">
+          Log in
+        </button>
+      </form>
+      <form id="sign" action="/signup" method="POST">
+        <h1 id="h1"><font color="red">Sign</font> up</h1>
+        <input
+          name="Sname"
+          type="text"
+          placeholder="Userame"
+          autocomplete="off"
+        />
+        <br />
+        <input
+          name="Semail"
+          type="email"
+          placeholder="Email"
+          autocomplete="off"
+        /><br />
+        <input
+          name="Spass"
+          type="password"
+          placeholder="Password"
+        /><br /><input
+          name="Scpass"
+          type="password"
+          placeholder="Confirm Password"
+        /><br /><button type="submit" id="Ssub">Sign Up</button>
+      </form>
+    </div>
   </body>
   <script>
     //This is to avoid Flickering
