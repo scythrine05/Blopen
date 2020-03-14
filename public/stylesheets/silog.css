@@ -13,7 +13,7 @@ body {
   margin: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  background: url(../images/silog_back.jpg);
+  background: url(../images/body_back.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -113,18 +113,21 @@ header h1 {
   align-items: center;
   display: flex;
   flex-direction: column;
-  /* background: rgba(55, 63, 39, 0.7); */
-  background: rgb(55, 63, 39, 0.5);
   height: 30em;
   padding: 40px 5em;
   margin: 30px 0px;
   transition: all 0.5s ease-in-out;
+  background: url("../images/body_back 2.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 #log {
-  box-shadow: 20px 20px 20px black;
+  box-shadow: 30px 30px 80px 10px black;
 }
 #sign {
-  box-shadow: -20px 20px 20px black;
+  box-shadow: -30px 30px 80px 10px black;
 }
 .body h1 {
   font-size: 50px;
@@ -132,11 +135,10 @@ header h1 {
 .body input {
   height: 2em;
   width: 20em;
-  font-size: 17px;
-  font-weight: bold;
-  color: wheat;
+  font-size: 18px;
+  color: white;
   text-shadow: 1px 1px black;
-  background: rgba(245, 222, 179, 0.2);
+  background: rgba(245, 222, 179, 0.7);
   border-left: none;
   border-right: none;
   border-top: none;
@@ -148,28 +150,28 @@ header h1 {
 }
 
 .body input::placeholder {
-  font-size: 15px;
-  font-family: "vkts";
+  font-size: 20px;
+  font-family: "Yanone Kaffeesatz", sans-serif;
   font-weight: lighter;
-  color: wheat;
+  color: white;
 }
 
 .body button {
-  font-size: 15px;
+  font-size: 20px;
   font-family: "vkts";
-  width: 10em;
+  width: 7em;
   height: 4em;
   border: 2px solid wheat;
   transition: all 0.3s ease-in-out;
-  color: wheat;
+  color: white;
   cursor: pointer;
   background: transparent;
-  text-shadow: 1px 1px black;
+  text-shadow: 1px 2px black;
   transform-style: preserve-3d;
 }
 .body button:hover {
-  box-shadow: inset 0px -60px wheat;
-  color: #df5b49;
+  box-shadow: inset 0px -85px wheat;
+  color: rgb(238, 76, 76);
 }
 
 .body input:focus {

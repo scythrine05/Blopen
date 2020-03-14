@@ -120,6 +120,7 @@ nav ul a li {
   display: block;
   margin-top: 2.5px;
   transition: all 0.3s ease;
+  border: 1px solid black;
 }
 .res-btn span::after {
   content: "";
@@ -130,6 +131,7 @@ nav ul a li {
   display: block;
   margin-top: 2px;
   transition: all 0.3s ease;
+  border: 1px solid black;
 }
 
 .res-btn::before {
@@ -141,6 +143,7 @@ nav ul a li {
   display: block;
   margin-top: 1px;
   transition: all 0.3s ease;
+  border: 1px solid black;
 }
 
 #border2 {
@@ -154,10 +157,12 @@ nav ul a li {
 .nav-box:checked ~ .res-btn::before {
   transform: rotate(45deg);
   background: wheat;
+  border: none;
 }
 .nav-box:checked ~ .res-btn::after {
   transform: translateY(-25px) rotate(-45deg);
   background: wheat;
+  border: none;
 }
 .nav-box:checked ~ .res-btn span::after {
   opacity: 0;
@@ -242,6 +247,27 @@ nav ul a li {
     font-size: 35px;
     margin-bottom: 40px;
   }
+
+  #topic {
+    font-size: 40px;
+    margin-left: 30px;
+  }
+  .view h2 {
+    font-size: 16px;
+  }
+
+  .blogs .view {
+    width: inherit;
+  }
+  body .blogs #border3 {
+    top: 47.5em;
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 430px) {
+  .body #border3 {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 384px) {
@@ -305,7 +331,65 @@ nav ul a li {
 .post a span:hover {
   box-shadow: inset -130px -130px wheat;
 }
-
+#border3 {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  top: 51em;
+}
 .blogs {
-  margin-top: 15em;
+  display: flex;
+  justify-content: center;
+  margin-top: 20em;
+  background: wheat;
+  flex-direction: column;
+}
+.blogs h1 {
+  font-family: "vkts";
+  color: #cda34f;
+  font-size: 65px;
+  margin-top: 2em;
+  text-shadow: 3px 3px black;
+  letter-spacing: 3px;
+}
+.view {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  width: 50em;
+  margin-top: 10em;
+  margin-bottom: 10em;
+  align-self: center;
+  overflow: hidden;
+  white-space: wrap;
+  line-height: 3em;
+  color: white;
+  text-shadow: 2px 2px black;
+  font-family: "Viga", sans-serif;
+  letter-spacing: 2px;
+}
+
+.view span {
+  font-size: 22px;
+  border: 2px solid white;
+  padding: 20px;
+  margin-top: 30px;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.view span:hover {
+  box-shadow: inset 0px 65px wheat;
+  color: rgb(236, 114, 114);
+}
+@media only screen and (max-width: 1439px) {
+  .blogs #border3 {
+    top: 53em;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .blogs #border3 {
+    top: 52.5em;
+  }
 }

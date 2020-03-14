@@ -51,11 +51,16 @@ header h1 {
   height: auto;
   width: 100%;
 }
-
 @media only screen and (max-width: 768px) {
   header h1 {
     font-size: 40px;
     margin-top: 20px;
+  }
+
+  #greet {
+    font-size: 40px;
+    margin-left: 30px;
+    text-shadow: 2px 2px #cda34f;
   }
 
   #icon {
@@ -66,51 +71,31 @@ header h1 {
   #border {
     margin-top: 5px;
   }
-  .body {
-    flex-direction: column;
-  }
-
-  #upload,
-  #sign {
-    margin-top: 10em;
-  }
-
-  #upload,
-  #sign {
-    position: relative;
-    top: 10em;
-  }
-
-  #h1 {
-    white-space: nowrap;
-    font-size: 40px;
-  }
-  form .photo {
-    height: 15em;
-    width: 15em;
-  }
-  #profile {
-    transform: scale(0.8, 0.8);
-  }
-  #upload input {
-    width: 17em;
+  #mail {
+    height: 3em;
+    width: 100%;
+    font-size: 12px;
   }
 }
 
 .body {
-  width: 100%;
-  height: 40em;
-  font-family: "vkts";
-  color: wheat;
   display: flex;
-  justify-content: space-around;
-  margin-top: 8em;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 6em;
+  padding: 30px;
+  font-family: "vkts";
 }
-.body input[type="file"] {
-  display: none;
+.body h1 {
+  font-size: 65px;
+  margin-top: 2em;
+  text-shadow: 3px 3px #cda34f;
+  letter-spacing: 3px;
+  color: wheat;
 }
-#mail {
-  height: 2em;
+
+input [type="email"] {
+  height: 3em;
   width: 20em;
   font-size: 17px;
   font-weight: bold;
@@ -124,72 +109,28 @@ header h1 {
   padding-left: 20px;
   transition: all 0.3s ease-in-out;
   font-family: "Yanone Kaffeesatz", sans-serif;
-  letter-spacing: 1px;
-  margin-top: 30px;
+  letter-spacing: 1.5px;
 }
-.body input::placeholder {
-  font-size: 15px;
-  font-family: "vkts";
-  font-weight: lighter;
-  color: white;
-}
-#upload,
-#sign {
-  text-shadow: 2px 2px #cda34f;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 30em;
-  padding: 40px 5em;
-  margin: 30px 0px;
-  transition: all 0.5s ease-in-out;
-}
-#upload {
-  box-shadow: 20px 20px 20px black;
-}
-#sign {
-  box-shadow: -20px 20px 20px black;
-}
-.body h1 {
-  font-size: 50px;
-}
-
-.body button {
+#em button {
   font-size: 15px;
   font-family: "vkts";
   width: 11em;
-  height: 5em;
+  height: 4em;
   border: 2px solid wheat;
   transition: all 0.3s ease-in-out;
   color: white;
   cursor: pointer;
+  margin-left: 30px;
   background: transparent;
   text-shadow: 1px 1px black;
   transform-style: preserve-3d;
   margin-top: 40px;
 }
-
-#choose {
-  border: 2px solid wheat;
-  padding: 27px 53px 27px 53px;
-  text-shadow: 1px 1px black;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-  color: white;
-}
-
-.body button:hover,
-#choose:hover {
+#em button:hover {
   box-shadow: inset 0px -80px wheat;
-  color: #df5b49;
+  color: red;
 }
-.photo {
-  height: 20em;
-  width: 20em;
-  overflow: hidden;
-}
-#profile {
-  height: 20em;
-  width: 20em;
-  border-radius: 50%;
+
+#em input:focus {
+  outline: none;
 }

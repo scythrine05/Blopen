@@ -9,6 +9,10 @@
       href="https://fonts.googleapis.com/css?family=Frijole&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css?family=Viga&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
@@ -69,7 +73,7 @@
       <a href="#">
         <img
           id="guest"
-          src="images/guest.png"
+          src="<%= typeof file != 'undefined'? file: 'images/guest.png' %>"
           height="60px"
           width="60px"
           alt="Account"
@@ -78,9 +82,7 @@
       <img src="images/border.png" id="border" />
     </header>
     <div class="body">
-      <h1 id="greet">
-        Welcome <%= user %>
-      </h1>
+      <h1 id="greet">Welcome <font color="red"> <%= user %></font></h1>
       <p id="mot">
         <font color="red">Write</font> what you cant<font color="red">
           SAY</font
@@ -90,10 +92,31 @@
         <a href="#"><span id="post">Post</span></a
         ><a href="#"> <span id="look">Look</span></a>
       </div>
-      <div id="#blogs" class="blogs"></div>
+
+      <div id="#blogs" class="blogs">
+        <img src="images/border 5.png" class="border3" id="border3" />
+        <h1 id="topic"><%= topic %></h1>
+        <div class="view">
+          <h2>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit qui
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit qui
+          </h2>
+          <span>More</span>
+        </div>
+        <div class="view">
+          <h2>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit qui
+            ex doloribus minus quisquam vitae inventore sunt? Facere voluptatum,
+            ipsa accusamus ex totam nemo quia, dolores natus non ut labore.
+          </h2>
+          <span>More</span>
+        </div>
+      </div>
     </div>
+
     <script>
       //This is avoid Flickering
     </script>
+    <footer></footer>
   </body>
 </html>

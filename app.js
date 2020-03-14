@@ -6,8 +6,9 @@ const bodyParser = require("body-parser");
 const { check, validationResult } = require("express-validator/check");
 const { matchedData, sanitized } = require("express-validator/filter");
 const mysql = require("mysql");
-const multer = require("multer");
+const ejs = require("ejs");
 const session = require("express-session");
+const multer = require("multer");
 // CREATE A CONNECTION
 
 const connection = mysql.createConnection({
@@ -21,13 +22,34 @@ const connection = mysql.createConnection({
 const storage = multer.diskStorage({
   destination: "./public/images/uploaded",
   filename: (req, file, cb) => {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
+    cb(null, Date.now() + path.extname(file.originalname));
   }
 });
 
+//UPLOAD SECTION
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 100000000 },
+  fileFilter: (req, file, cb) => {
+    checkFileType(file, cb);
+  }
+}).single("myImage");
+
+//CHECK FILETYPE
+
+function checkFileType(file, cb) {
+  const filetypes = /jpeg|jpg|png|gif|bmp/;
+  const extname = filetypes.test(path.extname(file.originalname));
+
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    console.log("Images only");
+  }
+}
 //EXPRESS SESSION
 
 const app = express();
@@ -56,7 +78,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
   if (req.session.loggedin) {
-    res.render("index", { title: "|Home|", user: req.session.user });
+    res.render("index", {
+      title: "|Home|",
+      user: req.session.user,
+      topic: "Home"
+    });
   } else {
     res.render("silog", {
       title: "|Log/Sign|",
@@ -144,7 +170,6 @@ app.post(
           cross: "images/cross.png",
           cross2: "images/Empty.png"
         });
-        console.log("here2");
       } else {
         return true;
       }
@@ -153,6 +178,7 @@ app.post(
   (req, res) => {
     if (!req.session.loggedin) {
       const errors = validationResult(req);
+      console.log(errors.mapped());
       if (!errors.isEmpty()) {
         res.render("silog", {
           title: "|Log/Sign|",
@@ -172,9 +198,10 @@ app.post(
                 cross: "images/cross.png",
                 cross2: "images/Empty.png"
               });
-              console.log("here3");
             } else {
-              res.redirect("/upload");
+              req.session.user = req.body.Sname;
+              req.session.loggedin = true;
+              res.redirect("/");
             }
           }
         );
@@ -185,7 +212,9 @@ app.post(
   }
 );
 app.get("/upload", (req, res) => {
-  res.render("Profile_pic");
+  res.render("profile", {
+    title: "|Profile_Picture|"
+  });
 });
 app.get("/logout", (req, res) => {
   if (req.session.loggedin) {
@@ -193,5 +222,10 @@ app.get("/logout", (req, res) => {
   }
   res.redirect("/");
 });
-
+//IMAGE AREA
+app.get("/index", (req, res) => {
+  req.session.loggedin = true;
+  res.render("index");
+});
+//SERVER
 app.listen(port, () => console.log("Server is Running on port: " + port));
