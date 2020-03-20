@@ -14,7 +14,14 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body
+    background="<%= back %>"
+    style=" 
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;"
+  >
     <header>
       <img
         id="icon"
@@ -40,20 +47,19 @@
           </a>
         </div>
         <ul>
-          <a href="#">
-            <li>
-              Home
-            </li></a
-          ><a href="#">
-            <li>
-              Trending
-            </li></a
-          ><a href="#">
-            <li>
-              Your Blogs
-            </li></a
-          ><a href="#">
-            <li class="cat">
+          <li>
+            <a href="/"> Home</a>
+          </li>
+
+          <li>
+            <a href="/trending"> Trending</a>
+          </li>
+          <li>
+            <a href="myBlogs"> Your Blogs</a>
+          </li>
+
+          <li class="cat">
+            <a href="/Categories">
               Categories
               <img
                 id="arrow-down"
@@ -62,12 +68,12 @@
                 width="20px"
                 alt="icon"
                 style="transform: rotate(-90deg);"
-              /></li></a
-          ><a href="/logout">
-            <li>
-              Log out
-            </li></a
-          >
+            /></a>
+          </li>
+
+          <li>
+            <a href="/logout"> Log out</a>
+          </li>
         </ul>
       </nav>
       <a href="#">
@@ -82,14 +88,14 @@
       <img src="images/border.png" id="border" />
     </header>
     <div class="body">
-      <h1 id="greet">Welcome <font color="red"> <%= user %></font></h1>
+      <h1 id="greet"><%= user %><font color="red"> <%= user2 %></font></h1>
       <p id="mot">
-        <font color="red">Write</font> what you cant<font color="red">
-          SAY</font
+        <font color="red"><%= one %></font><%= two %><font color="red">
+          <%= three %></font
         >
       </p>
       <div class="post">
-        <a href="#"><span id="post">Post</span></a
+        <a href="/post"><span id="post">Post</span></a
         ><a href="#"> <span id="look">Look</span></a>
       </div>
 
@@ -117,6 +123,7 @@
     <script>
       //This is avoid Flickering
     </script>
+    <script type="text/javascript" src="javascripts/look.js"></script>
     <footer></footer>
   </body>
 </html>

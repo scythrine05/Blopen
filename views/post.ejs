@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post</title>
+    <link rel="stylesheet" href="stylesheets/post.css" /> 
+  </head>
+  <body>
+      <header>
+        <img id="icon" src="images/icon.png" height="50px" width="50px" alt="icon" />
+        <h1>Bl<font color="red">o</font>pen</h1>
+        <input class="nav-box" type="checkbox" id="res-btn" />
+        <label class="res-btn" for="res-btn"><span></span></label>
+        <img id="border2" src="images/border 2.png" />
+        <nav>
+          <div class="social">
+            <a href="#">
+              <img src="images/fb.png" height="55px" width="55px" alt="Fb" /></a>
+            <a href="#">
+              <img src="images/insta.png" height="55px" width="55px" alt="Fb" /></a>
+            <a href="#">
+              <img src="images/tweet.png" height="55px" width="55px" alt="Fb" />
+            </a>
+          </div>
+          <ul>
+            <li>
+              <a href="/"> Home</a>
+            </li>
+      
+            <li>
+              <a href="/trending"> Trending</a>
+            </li>
+            <li>
+              <a href="myBlogs"> Your Blogs</a>
+            </li>
+      
+            <li class="cat">
+              <a href="/Categories">
+                Categories
+                <img id="arrow-down" src="images/arrow-down.png" height="20px" width="20px" alt="icon"
+                  style="transform: rotate(-90deg);" /></a>
+            </li>
+      
+            <li>
+              <a href="/logout"> Log out</a>
+            </li>
+          </ul>
+        </nav>
+        <a href="#">
+          <img id="guest" src="<%= typeof file != 'undefined'? file: 'images/guest.png' %>" height="60px" width="60px"
+            alt="Account" />
+        </a>
+        <img src="images/border.png" id="border" />
+      </header>
+      <div class="post">
+    <h1 id="topic">Post Your<font color="red"> Blog</font></h1>
+    <br />
+    <form action="/index" method="POST">
+      <h2 class="sub-topic">Heading:</h2>
+      <br />
+      <input autocomplete="off" placeholder="Home....."
+        type="text"
+        name="head"
+      /><br />
+      <h2 class="sub-topic">Body:</h2></br>
+      <textarea name="para" placeholder="This is my home...." rows="15" cols="150"></textarea><br />
+      <h2 class="sub-topic" id="category">Category:<br/>
+      <label for="fashion"><input id="fashion" type="radio" name="category">Fashion</label>
+      <label for="travel"><input id="travel" type="radio" name="category">Travel</label>
+      <label for="food"><input id="food" type="radio" name="category">Food</label>
+      <label for="entertainment"><input id="entertainment" type="radio" name="category">Entertainment</label>
+      <label for="commerce"><input id="commerce" type="radio" name="category">Commerce</label>
+      <label for="technology"><input id="technology" type="radio" name="category">Technology</label>
+        <label for="biology"><input id="biology" type="radio" name="category">Biology</label>
+      <label for="others"><input id="others" type="radio" name="category">Others</label>
+      </h2>
+     <button>POST</button>
+    </form>
+    </div>
+  </body>
+</html>

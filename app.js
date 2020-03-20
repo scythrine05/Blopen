@@ -80,8 +80,13 @@ app.get("/", (req, res) => {
   if (req.session.loggedin) {
     res.render("index", {
       title: "|Home|",
-      user: req.session.user,
-      topic: "Home"
+      user: "Welcome ",
+      user2: req.session.user, // HOME
+      topic: "Home",
+      back: "images/body_back.jpg",
+      one: "Write ",
+      two: "what you cant",
+      three: "Say"
     });
   } else {
     res.render("silog", {
@@ -227,5 +232,43 @@ app.get("/index", (req, res) => {
   req.session.loggedin = true;
   res.render("index");
 });
+
+//POSTING BLOG
+
+app.get("/post", (req, res) => {
+  res.render("post");
+});
+
+//TRENDING
+
+app.get("/trending", (req, res) => {
+  res.render("index", {
+    title: "|Trending|",
+    user: "It is ",
+    user2: "Trending", // HOME
+    topic: "Trending",
+    back: "images/trending.jpg",
+    one: "See ",
+    two: "what is",
+    three: "Trending"
+  });
+});
+//MY BLOGS
+
+app.get("/myBlogs", (req, res) => {
+  res.render("index", {
+    title: "|My_Blogs|",
+    user: "Look at your ",
+    user2: "blogs",
+    // HOME
+    topic: "Your Blogs",
+    back: "images/my_blogs.jpg",
+    one: "Look ",
+    two: "what you ",
+    three: "wrote"
+  });
+});
 //SERVER
-app.listen(port, () => console.log("Server is Running on port: " + port));
+app.listen(port, "0.0.0.0", () =>
+  console.log("Server is Running on port: " + port)
+);
