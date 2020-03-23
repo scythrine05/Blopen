@@ -1,6 +1,10 @@
 @font-face {
   font-family: "Vkts";
-  src: url(../fonts/vtks-distress.woff);
+  src: url(../fonts/Pacifico-Regular.ttf);
+}
+@font-face {
+  font-family: "Ubuntu";
+  src: url(../fonts/Ubuntu-Regular.ttf);
 }
 
 * {
@@ -24,34 +28,38 @@ header {
   width: 100%;
   height: 5em;
   padding: 20px 0px 20px 0;
-  font-family: "vkts";
-  box-shadow: inset 0px 5px 5px black;
-  color: #f5deb3;
+  color: white;
   margin: 0;
-  background: rgb(55, 63, 39);
+  background: rgba(65, 179, 163, 0.9);
 }
 #icon {
   float: left;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-left: 30px;
 }
 
 header h1 {
+  font-family: "vkts";
   float: left;
   font-size: 50px;
   letter-spacing: 1.5px;
-  margin-top: 10px;
+  margin-top: 0px;
   margin-left: 10px;
-  text-shadow: #cda3af 1px 1px;
-  text-shadow: 2px 2px #cda34f;
+  text-shadow: black 1px 1px;
 }
 
 #border {
-  margin-top: -5px;
+  margin-top: -1.3em;
   height: auto;
   width: 100%;
 }
 
+@media only screen and (max-width: 470px) {
+  #border {
+    position: relative;
+    top: -11px;
+  }
+}
 @media only screen and (max-width: 768px) {
   header h1 {
     font-size: 40px;
@@ -61,10 +69,10 @@ header h1 {
   #icon {
     height: 35px;
     width: 35px;
-    margin-top: 27px;
+    margin-top: 2.5em;
   }
   #border {
-    margin-top: 5px;
+    margin-top: -1.2em;
   }
   .body {
     flex-direction: column;
@@ -93,7 +101,6 @@ header h1 {
 
   .body form input::placeholder {
     font-size: 14px;
-    font-family: "vkts";
   }
 }
 
@@ -101,7 +108,7 @@ header h1 {
   width: 100%;
   height: 40em;
   font-family: "vkts";
-  color: wheat;
+  color: white;
   display: flex;
   justify-content: space-around;
   margin-top: 8em;
@@ -109,7 +116,7 @@ header h1 {
 
 #log,
 #sign {
-  text-shadow: 2px 2px #cda34f;
+  text-shadow: 1px 1px black;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -117,64 +124,59 @@ header h1 {
   padding: 40px 5em;
   margin: 30px 0px;
   transition: all 0.5s ease-in-out;
-  background: url("../images/body_back 2.jpg");
+  background: rgba(65, 179, 163, 0.9);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  border-radius: 0% 5% 0% 5%;
 }
-#log {
-  box-shadow: 30px 30px 80px 10px black;
-}
-#sign {
-  box-shadow: -30px 30px 80px 10px black;
-}
+
 .body h1 {
   font-size: 50px;
 }
 .body input {
   height: 2em;
   width: 20em;
-  font-size: 18px;
-  color: white;
-  text-shadow: 1px 1px black;
-  background: rgba(245, 222, 179, 0.7);
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  background: rgba(245, 222, 179, 0.5);
   border-left: none;
   border-right: none;
   border-top: none;
-  border-bottom: 2px solid rgb(245, 222, 179);
+  border-bottom: none;
   padding-left: 20px;
   transition: all 0.3s ease-in-out;
-  font-family: "Yanone Kaffeesatz", sans-serif;
-  letter-spacing: 2px;
+  font-family: "Ubuntu";
 }
 
 .body input::placeholder {
-  font-size: 20px;
-  font-family: "Yanone Kaffeesatz", sans-serif;
-  font-weight: lighter;
-  color: white;
+  font-size: 15px;
+  font-family: "Ubuntu";
+  font-weight: bold;
+  color: lightslategray;
+  text-shadow: none;
 }
 
 .body button {
   font-size: 20px;
-  font-family: "vkts";
+  font-family: "Ubuntu";
+  font-weight: bolder;
   width: 7em;
   height: 4em;
-  border: 2px solid wheat;
+  border: 2px solid #e8a87c;
   transition: all 0.3s ease-in-out;
   color: white;
   cursor: pointer;
   background: transparent;
-  text-shadow: 1px 2px black;
-  transform-style: preserve-3d;
+  text-shadow: 0.5px 0.5px #e8a87c;
 }
 .body button:hover {
-  box-shadow: inset 0px -85px wheat;
+  box-shadow: inset 0px -85px #e8a87c;
   color: white;
 }
 
 .body input:focus {
-  box-shadow: 5px 5px 20px black;
+  box-shadow: 0.1px 0.1px 5px black;
   outline: none;
 }

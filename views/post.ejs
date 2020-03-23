@@ -56,27 +56,31 @@
       <div class="post">
     <h1 id="topic">Post Your<font color="red"> Blog</font></h1>
     <br />
-    <form action="/index" method="POST">
-      <h2 class="sub-topic">Heading:</h2>
+    <form action="/new" method="POST">
+      <h2 class="sub-topic">Heading</h2>
       <br />
       <input autocomplete="off" placeholder="Home....."
         type="text"
         name="head"
       /><br />
-      <h2 class="sub-topic">Body:</h2></br>
+      <h2 class="sub-topic">Body</h2></br>
       <textarea name="para" placeholder="This is my home...." rows="15" cols="150"></textarea><br />
-      <h2 class="sub-topic" id="category">Category:<br/>
-      <label for="fashion"><input id="fashion" type="radio" name="category">Fashion</label>
-      <label for="travel"><input id="travel" type="radio" name="category">Travel</label>
-      <label for="food"><input id="food" type="radio" name="category">Food</label>
-      <label for="entertainment"><input id="entertainment" type="radio" name="category">Entertainment</label>
-      <label for="commerce"><input id="commerce" type="radio" name="category">Commerce</label>
-      <label for="technology"><input id="technology" type="radio" name="category">Technology</label>
-        <label for="biology"><input id="biology" type="radio" name="category">Biology</label>
-      <label for="others"><input id="others" type="radio" name="category">Others</label>
+      <h2 class="sub-topic" id="category">Category<br/>
+      <label for="fashion"><input value="0" id="fashion" type="radio" name="category">Fashion</label>
+      <label for="travel"><input value="1"  id="travel" type="radio" name="category">Travel</label>
+      <label for="food"><input id="food" value="2" type="radio" name="category">Food</label>
+      <label for="entertainment"><input id="entertainment" value="3" type="radio" name="category">Entertainment</label>
+      <label for="commerce"><input id="commerce" value="4" type="radio" name="category">Commerce</label>
+      <label for="technology"><input id="technology" value="5" type="radio" name="category">Technology</label>
+        <label for="biology"><input id="biology" value="6" type="radio" name="category">Biology</label>
+      <label for="others"><input id="others" value="7" type="radio" name="category">Others</label>
       </h2>
      <button>POST</button>
     </form>
     </div>
+    <script>
+
+      //This is for not flickering
+    </script>
   </body>
 </html>

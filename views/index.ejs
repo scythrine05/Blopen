@@ -30,10 +30,10 @@
         width="50px"
         alt="icon"
       />
-      <h1>Bl<font color="red">o</font>pen</h1>
+      <h1>Bl<font color="#fba100">o</font>pen</h1>
       <input class="nav-box" type="checkbox" id="res-btn" />
       <label class="res-btn" for="res-btn"><span></span></label>
-      <img id="border2" src="images/border 2.png" />
+      <img id="border2" src="images/border 4.png" />
       <nav>
         <div class="social">
           <a href="#">
@@ -72,52 +72,52 @@
           </li>
 
           <li>
-            <a href="/logout"> Log out</a>
+            <a href="#"> About us </a>
           </li>
         </ul>
       </nav>
-      <a href="#">
+      <a href="/account">
         <img
           id="guest"
-          src="<%= typeof file != 'undefined'? file: 'images/guest.png' %>"
+          src="images/guest.png"
           height="60px"
           width="60px"
           alt="Account"
         />
+        <span id="guest_des"><%= des %></span>
       </a>
       <img src="images/border.png" id="border" />
     </header>
     <div class="body">
-      <h1 id="greet"><%= user %><font color="red"> <%= user2 %></font></h1>
+      <h1 id="greet"><%= user %><font color="#fba100"> <%= user2 %></font></h1>
       <p id="mot">
-        <font color="red"><%= one %></font><%= two %><font color="red">
+        <font color="#e27d60"><%= one %></font><%= two %><font color="#e27d60">
           <%= three %></font
         >
       </p>
       <div class="post">
-        <a href="/post"><span id="post">Post</span></a
-        ><a href="#"> <span id="look">Look</span></a>
+        <a href="/post"><span id="post">Post</span></a>
       </div>
+    </div>
 
-      <div id="#blogs" class="blogs">
-        <img src="images/border 5.png" class="border3" id="border3" />
-        <h1 id="topic"><%= topic %></h1>
-        <div class="view">
-          <h2>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit qui
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit qui
-          </h2>
-          <span>More</span>
-        </div>
-        <div class="view">
-          <h2>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit qui
-            ex doloribus minus quisquam vitae inventore sunt? Facere voluptatum,
-            ipsa accusamus ex totam nemo quia, dolores natus non ut labore.
-          </h2>
-          <span>More</span>
-        </div>
+    <div id="#blogs" class="blogs">
+      <img src="images/border 5.png" id="border3" />
+      <% if(result.length){ for(var i = 0;i < result.length;i++) { %>
+      <div class="view">
+        <h3><%= result[i].Id %></h3>
+        <h6>
+          <%= result[i].Day %> <%= result[i].Month %> <%= result[i].Year %>
+        </h6>
+        <h2>
+          <%= result[i].Heading %>
+        </h2>
+        <span>More</span>
       </div>
+      <% } }else{ %>
+      <div class="view">
+        <h2>No Blogs Till Now</h2>
+      </div>
+      <% } %>
     </div>
 
     <script>

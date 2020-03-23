@@ -9,14 +9,16 @@ const mysql = require("mysql");
 const ejs = require("ejs");
 const session = require("express-session");
 const multer = require("multer");
+var cookieParser = require("cookie-parser");
 // CREATE A CONNECTION
 
 const connection = mysql.createConnection({
   host: "localhost",
   password: "",
   user: "root",
-  database: "Blopen"
+  database: "blopen"
 });
+
 //CREATE STORAGE FOR PICTURE STORAGE
 
 const storage = multer.diskStorage({
@@ -55,7 +57,7 @@ function checkFileType(file, cb) {
 const app = express();
 app.use(
   session({
-    secret: "CoronaVirus",
+    secret: "Coronaiscoming",
     resave: true,
     saveUninitialized: true
   })
@@ -74,26 +76,103 @@ app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+//USING COOKIE-PARSER
+app.use(cookieParser());
 //LOCALHOST
 
 app.get("/", (req, res) => {
-  if (req.session.loggedin) {
-    res.render("index", {
-      title: "|Home|",
-      user: "Welcome ",
-      user2: req.session.user, // HOME
-      topic: "Home",
-      back: "images/body_back.jpg",
-      one: "Write ",
-      two: "what you cant",
-      three: "Say"
-    });
+  var sql2 = "SELECT * FROM catnav ORDER BY TIME(Time) Asc";
+  connection.query(sql2, (err, result, field) => {
+    if (err) {
+      console.log("Query2 not Executed");
+      throw err;
+    } else {
+      console.log("Query2 Executed");
+      if (req.session.loggedin) {
+        res.render("index", {
+          result: result,
+          title: "|Home|",
+          user: "Welcome ",
+          user2: req.session.user, // HOME
+          topic: "Home",
+          back: "images/body_back.jpg",
+          one: "Write ",
+          two: "what you can't",
+          three: "Say",
+          des: "Logout"
+        });
+      } else {
+        res.render("index", {
+          result: result,
+          title: "|Home|",
+          user: "Welcome ",
+          user2: " Guest", // HOME
+          topic: "Home",
+          back: "images/body_back.jpg",
+          one: "Write ",
+          two: "what you can't",
+          three: "Say",
+          des: "Log/Sign"
+        });
+      }
+    }
+  });
+});
+//MONTH
+
+var mon = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sept",
+  "Oct",
+  "Nov",
+  "Dec"
+];
+
+var month = new Date().getMonth();
+
+//POST
+
+app.post("/new", (req, res) => {
+  var sql1 =
+    "INSERT INTO catnav(Id,Heading,Paragraph,Day,Month,Year,Category) values(?,?,?,?,?,?,?)";
+  if (req.body.head && req.body.para) {
+    connection.query(
+      sql1,
+      [
+        req.session.user,
+        req.body.head,
+        req.body.para,
+        new Date().getDate(),
+        mon[month],
+        new Date().getFullYear(),
+        req.body.category
+      ],
+      (err, result, field) => {
+        if (err) {
+          throw err;
+        } else {
+          res.redirect("/");
+        }
+      }
+    );
   } else {
-    res.render("silog", {
-      title: "|Log/Sign|",
-      cross: "images/Empty.png",
-      cross2: "images/Empty.png"
-    });
+    console.log("Write something");
+  }
+});
+//Account
+app.get("/account", (req, res) => {
+  if (req.session.loggedin) {
+    req.session.loggedin = false;
+    res.redirect("/");
+  } else {
+    res.render("silog", { title: "|Login/Signup|" });
   }
 });
 //LOGIN
@@ -116,9 +195,7 @@ app.post(
 
       if (!errors.isEmpty()) {
         res.render("silog", {
-          title: "|Log/Sign|",
-          cross: "images/Empty.png",
-          cross2: "images/cross.png"
+          title: "|Log/Sign|"
         });
       } else {
         var email = req.body.Lemail;
@@ -129,22 +206,17 @@ app.post(
             if (results.length > 0) {
               req.session.loggedin = true;
               req.session.user = results[0].Name;
-              req.session.id = results[0].Id;
               res.redirect("/");
             } else {
               res.render("silog", {
-                title: "|Log/Sign|",
-                cross: "images/Empty.png",
-                cross2: "images/cross.png"
+                title: "|Log/Sign|"
               });
             }
             res.end();
           });
         } else {
           res.render("silog", {
-            title: "|Log/Sign|",
-            cross: "images/Empty.png",
-            cross2: "images/cross.png"
+            title: "|Log/Sign|"
           });
         }
       }
@@ -171,9 +243,7 @@ app.post(
     check("Scpass").custom((value, { req }) => {
       if (value != req.body.Spass) {
         res.render("silog", {
-          title: "|Log/Sign|",
-          cross: "images/cross.png",
-          cross2: "images/Empty.png"
+          title: "|Log/Sign|"
         });
       } else {
         return true;
@@ -186,9 +256,7 @@ app.post(
       console.log(errors.mapped());
       if (!errors.isEmpty()) {
         res.render("silog", {
-          title: "|Log/Sign|",
-          cross: "images/cross.png",
-          cross2: "images/Empty.png"
+          title: "|Log/Sign|"
         });
         console.log(errors.mapped());
       } else {
@@ -199,14 +267,21 @@ app.post(
           (err, result, fields) => {
             if (err) {
               res.render("silog", {
-                title: "|Log/Sign|",
-                cross: "images/cross.png",
-                cross2: "images/Empty.png"
+                title: "|Log/Sign|"
               });
             } else {
-              req.session.user = req.body.Sname;
-              req.session.loggedin = true;
-              res.redirect("/");
+              var sql2 = "SELECT * FROM silog WHERE Email=?";
+
+              connection.query(sql2, [req.body.Semail], (error, resu) => {
+                if (error) {
+                  throw error;
+                } else {
+                  req.session.loggedin = true;
+                  req.session.user = resu[0].Name;
+                  req.session.id = resu[0].Id;
+                  res.redirect("/");
+                }
+              });
             }
           }
         );
@@ -221,52 +296,69 @@ app.get("/upload", (req, res) => {
     title: "|Profile_Picture|"
   });
 });
-app.get("/logout", (req, res) => {
-  if (req.session.loggedin) {
-    req.session.loggedin = false;
-  }
-  res.redirect("/");
-});
-//IMAGE AREA
-app.get("/index", (req, res) => {
-  req.session.loggedin = true;
-  res.render("index");
-});
 
 //POSTING BLOG
 
 app.get("/post", (req, res) => {
-  res.render("post");
+  if (req.session.loggedin) {
+    res.render("post");
+  } else {
+    res.redirect("/account");
+  }
 });
 
 //TRENDING
 
 app.get("/trending", (req, res) => {
-  res.render("index", {
-    title: "|Trending|",
-    user: "It is ",
-    user2: "Trending", // HOME
-    topic: "Trending",
-    back: "images/trending.jpg",
-    one: "See ",
-    two: "what is",
-    three: "Trending"
+  var sql2 = "SELECT * FROM catnav ORDER BY views";
+  connection.query(sql2, (err, result, field) => {
+    if (err) {
+      console.log("Query2 not Executed");
+      throw err;
+    } else {
+      console.log("Query2 Executed");
+      res.render("index", {
+        result: result,
+        title: "|Trending|",
+        user: "",
+        user2: "Trending",
+        topic: "Trending",
+        back: "images/trending.jpg",
+        one: "S0 ",
+        two: "what's",
+        three: "Trending"
+      });
+    }
   });
 });
 //MY BLOGS
 
 app.get("/myBlogs", (req, res) => {
-  res.render("index", {
-    title: "|My_Blogs|",
-    user: "Look at your ",
-    user2: "blogs",
-    // HOME
-    topic: "Your Blogs",
-    back: "images/my_blogs.jpg",
-    one: "Look ",
-    two: "what you ",
-    three: "wrote"
-  });
+  var sql2 = "SELECT * FROM catnav WHERE Id=?";
+  if (req.session.loggedin) {
+    connection.query(sql2, [req.session.user], (err, result, field) => {
+      if (err) {
+        console.log("Query2 not Executed");
+        throw err;
+      } else {
+        console.log("Query2 Executed");
+        res.render("index", {
+          result: result,
+          title: "|My_Blogs|",
+          user: "Your ",
+          user2: "Blogs", // HOME
+          topic: "Your blogs",
+          back: "images/my_blogs.jpg",
+          one: "See ",
+          two: "what you ",
+          three: "wrote",
+          des: "Logout"
+        });
+      }
+    });
+  } else {
+    res.redirect("/account");
+  }
 });
 //SERVER
 app.listen(port, "0.0.0.0", () =>
