@@ -4,24 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Post</title>
-    <link rel="stylesheet" href="stylesheets/post.css" /> 
+    <link rel="stylesheet" href="/stylesheets/post.css" /> 
     <link href="https://fonts.googleapis.com/css?family=Viga&display=swap" rel="stylesheet" />
   </head>
   <body>
       <header>
-        <img id="icon" src="images/icon.png" height="50px" width="50px" alt="icon" />
+        <img id="icon" src="/images/icon.png" height="50px" width="50px" alt="icon" />
         <h1>Bl<font color="#fba100">o</font>pen</h1>
         <input class="nav-box" type="checkbox" id="res-btn" />
         <label class="res-btn" for="res-btn"><span></span></label>
-        <img id="border2" src="images/border 4.png" />
+        <img id="border2" src="/images/border 4.png" />
         <nav>
           <div class="social">
             <a href="#">
-              <img src="images/fb.png" height="55px" width="55px" alt="Fb" /></a>
+              <img src="/images/fb.png" height="55px" width="55px" alt="Fb" /></a>
             <a href="#">
-              <img src="images/insta.png" height="55px" width="55px" alt="Fb" /></a>
+              <img src="/images/insta.png" height="55px" width="55px" alt="Fb" /></a>
             <a href="#">
-              <img src="images/tweet.png" height="55px" width="55px" alt="Fb" />
+              <img src="/images/tweet.png" height="55px" width="55px" alt="Fb" />
             </a>
           </div>
           <ul>
@@ -33,13 +33,13 @@
               <a href="/trending"> Trending</a>
             </li>
             <li>
-              <a href="myBlogs"> Your Blogs</a>
+              <a href="/myBlogs"> Your Blogs</a>
             </li>
       
             <li class="cat">
               <a href="/Categories">
                 Categories
-                <img id="arrow-down" src="images/arrow-down.png" height="20px" width="20px" alt="icon"
+                <img id="arrow-down" src="/images/arrow-down.png" height="20px" width="20px" alt="icon"
                   style="transform: rotate(-90deg);" /></a>
             </li>
       
@@ -49,24 +49,25 @@
           </ul>
         </nav>
         <a href="/account">
-          <img id="guest" src="<%= typeof file != 'undefined'? file: 'images/guest.png' %>" height="60px" width="60px"
+          <img id="guest" src="<%= typeof file != 'undefined'? file: '/images/guest.png' %>" height="60px" width="60px"
             alt="Account" />
             <span id="guest_des"><%= des %></span>
         </a>
-        <img src="images/border.png" id="border" />
+        <img src="/images/border.png" id="border" />
       </header>
       <div class="post">
     <h1 id="topic">Post Your<font color="#fba100"> Blog</font></h1>
     <br />
-    <form action="/new" method="POST">
+    <form action="/edited/<%= result[0].BId %>" method="POST">
       <h2 class="sub-topic">Heading :</h2>
       <br />
-      <input autocomplete="off" placeholder="Home....."
+      <input autocomplete="off"
         type="text"
         name="head"
+        value="<%= result[0].Heading %>" 
       /><br />
       <h2 class="sub-topic">Body :</h2></br>
-      <textarea name="para" placeholder="This is my home...." rows="15" cols="150"></textarea><br />
+      <textarea name="para" rows="15" cols="150" ><%= result[0].Paragraph %></textarea><br />
       <h2 class="sub-topic" id="category">Category :<br/>
       <label for="fashion"><input value="0" id="fashion" type="radio" name="category">Fashion</label>
       <label for="travel"><input value="1"  id="travel" type="radio" name="category">Travel</label>

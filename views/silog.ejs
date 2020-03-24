@@ -20,6 +20,7 @@
     </header>
     <div class="body">
       <form id="log" action="/login" method="POST">
+        <p><%= msg %></p>
         <h1 id="h1">log<font color="orange">In</font></h1>
         <br />
         <input
@@ -37,6 +38,16 @@
         </button>
       </form>
       <form id="sign" action="/signup" method="POST">
+        <div class="error">
+          <% if(msg2.Semail) { %>
+          <p><%= msg2.Semail.msg %><% } %></p>
+          <% if(msg2.Spass) { %>
+          <p><%= msg2.Spass.msg %><% } %></p>
+          <% if(msg2.Scpass) { %>
+          <p><%= msg2.Scpass.msg %><% } %></p>
+          <p><%= msg3 %></p>
+          <p><%= msg4 %></p>
+        </div>
         <h1 id="h1"><font color="orange">Sign</font> up</h1>
         <input
           name="Sname"
@@ -62,6 +73,7 @@
         /><br /><button type="submit" id="Ssub">Sign Up</button>
       </form>
     </div>
+    <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
     <script>
       //This is to avoid Flickering
     </script>

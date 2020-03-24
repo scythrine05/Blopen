@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="stylesheets/index.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/my.css" type="text/css" />
     <link
       href="https://fonts.googleapis.com/css?family=Frijole&display=swap"
       rel="stylesheet"
@@ -120,7 +120,11 @@
         <h2>
           <%= result[i].Heading %>
         </h2>
-        <a href="/blog/<%= result[i].BId %>"><span>More</span></a>
+        <div class="opt">
+          <a href="/edit/<%= result[i].BId %>"><span>Edit</span></a>
+          <a href="/blog/<%= result[i].BId %>"><span>More</span></a>
+          <a href="/delete/<%= result[i].BId %>"><span>Delete</span></a>
+        </div>
       </div>
       <% } }else{ %>
       <div class="view">

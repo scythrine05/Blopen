@@ -25,7 +25,7 @@ body {
   margin: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  background: url(../images/body_back.jpg);
+  background: url(../images/my_blogs.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -436,23 +436,27 @@ nav ul li {
   letter-spacing: 2px;
   font-size: 20px;
   border: 1px solid black;
-  transition: all 0.5s ease-in-out;
+  transition: 0.5s all ease-in-out;
+}
+.view:hover {
+  box-shadow: inset 1px 1px 30px black;
 }
 
 .view h3 {
   text-align: left;
-  transition: all 0.5s ease-in-out;
+  transition: 0.5s all ease-in-out;
   opacity: 0;
 }
 
 .view h6 {
   text-align: right;
 }
+
 .view a {
   color: white;
 }
 
-.view a span {
+.view span {
   font-size: 15px;
   border: 2px solid white;
   padding: 10px;
@@ -460,14 +464,13 @@ nav ul li {
   cursor: pointer;
   transition: 0.3s all ease-in-out;
   font-family: "Viga", sans-serif;
+  margin-left: 2em;
 }
 
 .view span:hover {
   box-shadow: inset 0px 65px wheat;
 }
-.view:hover {
-  box-shadow: inset 1px 1px 30px black;
-}
+
 .view:hover #guestx,
 .view:hover h3 {
   opacity: 1;
