@@ -314,7 +314,8 @@ nav ul li {
   padding: 0;
   margin-top: 10em;
   width: 100%;
-  background: rgba(65, 179, 163, 0.9);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid black;
   padding-left: 2px;
   padding-bottom: 20px;
 }

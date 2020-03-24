@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="stylesheets/index.css" type="text/css" />
+    <link rel="stylesheet" href="/stylesheets/index.css" type="text/css" />
     <link
       href="https://fonts.googleapis.com/css?family=Frijole&display=swap"
       rel="stylesheet"
@@ -25,7 +25,7 @@
     <header>
       <img
         id="icon"
-        src="images/icon.png"
+        src="/images/icon.png"
         height="50px"
         width="50px"
         alt="icon"
@@ -33,17 +33,17 @@
       <h1>Bl<font color="#fba100">o</font>pen</h1>
       <input class="nav-box" type="checkbox" id="res-btn" />
       <label class="res-btn" for="res-btn"><span></span></label>
-      <img id="border2" src="images/border 4.png" />
+      <img id="border2" src="/images/border 4.png" />
       <nav>
         <div class="social">
           <a href="#">
-            <img src="images/fb.png" height="55px" width="55px" alt="Fb"
+            <img src="/images/fb.png" height="55px" width="55px" alt="Fb"
           /></a>
           <a href="#">
-            <img src="images/insta.png" height="55px" width="55px" alt="Fb"
+            <img src="/images/insta.png" height="55px" width="55px" alt="Fb"
           /></a>
           <a href="#">
-            <img src="images/tweet.png" height="55px" width="55px" alt="Fb" />
+            <img src="/images/tweet.png" height="55px" width="55px" alt="Fb" />
           </a>
         </div>
         <ul>
@@ -55,15 +55,15 @@
             <a href="/trending"> Trending</a>
           </li>
           <li>
-            <a href="myBlogs"> My Blogs</a>
+            <a href="/myBlogs"> My Blogs</a>
           </li>
 
           <li class="cat">
-            <a href="/Categories">
+            <a href="/category">
               Categories
               <img
                 id="arrow-down"
-                src="images/arrow-down.png"
+                src="/images/arrow-down.png"
                 height="20px"
                 width="20px"
                 alt="icon"
@@ -79,14 +79,14 @@
       <a href="/account">
         <img
           id="guest"
-          src="images/guest.png"
+          src="/images/guest.png"
           height="60px"
           width="60px"
           alt="Account"
         />
         <span id="guest_des"><%= des %></span>
       </a>
-      <img src="images/border.png" id="border" />
+      <img src="/images/border.png" id="border" />
     </header>
     <div class="body">
       <h1 id="greet"><%= user %><font color="#fba100"> <%= user2 %></font></h1>
@@ -101,13 +101,13 @@
     </div>
 
     <div id="#blogs" class="blogs">
-      <img src="images/border 5.png" id="border3" />
+      <img src="/images/border 5.png" id="border3" />
       <% if(result.length){ for(var i = 0;i < result.length;i++) { %>
       <div class="view">
         <h3>
           <img
             id="guestx"
-            src="images/guest.png"
+            src="/images/guest.png"
             height="60px"
             width="60px"
             alt="Account"
@@ -132,7 +132,7 @@
     <script>
       //This is avoid Flickering
     </script>
-    <script type="text/javascript" src="javascripts/look.js"></script>
+    <script type="text/javascript" src="/javascripts/look.js"></script>
     <footer></footer>
   </body>
 </html>

@@ -25,11 +25,6 @@ body {
   margin: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  background: url(../images/blogs.jpg);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 header {

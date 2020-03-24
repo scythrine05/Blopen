@@ -100,7 +100,7 @@ app.get("/", (req, res) => {
           user: "Welcome ",
           user2: req.session.user, // HOME
           topic: "Home",
-          back: "images/body_back.jpg",
+          back: "/images/body_back.jpg",
           one: "Write ",
           two: "what you can't",
           three: "Say",
@@ -113,10 +113,287 @@ app.get("/", (req, res) => {
           user: "Welcome ",
           user2: " Guest", // HOME
           topic: "Home",
-          back: "images/body_back.jpg",
+          back: "/images/body_back.jpg",
           one: "Write ",
           two: "what you can't",
           three: "Say",
+          des: "Log/Sign"
+        });
+      }
+    }
+  });
+});
+//CATEGORY
+
+//FASHION
+app.get("/category/fashion", (req, res) => {
+  var sql2 = "SELECT * FROM catnav WHERE Category=0 ORDER BY Time Desc";
+  connection.query(sql2, (err, result, field) => {
+    if (err) {
+      console.log("Query2 not Executed");
+      throw err;
+    } else {
+      console.log("Query2 Executed");
+      if (req.session.loggedin) {
+        res.render("index", {
+          result: result,
+          title: "|Fashion|",
+          user: "Fashion ",
+          user2: "World", // HOME
+          topic: "Home",
+          back: "/images/fashion2.jpg",
+          one: "Let's ",
+          two: "Dress ",
+          three: "Up",
+          des: "Logout"
+        });
+      } else {
+        res.render("index", {
+          result: result,
+          title: "|Fashion|",
+          user: "Fashion ",
+          user2: " World", // HOME
+          topic: "Home",
+          back: "/images/fashion2.jpg",
+          one: "Let's ",
+          two: "Dress ",
+          three: "Up",
+          des: "Log/Sign"
+        });
+      }
+    }
+  });
+});
+//FOOD
+app.get("/category/food", (req, res) => {
+  var sql2 = "SELECT * FROM catnav WHERE Category=2 ORDER BY Time Desc";
+  connection.query(sql2, (err, result, field) => {
+    if (err) {
+      console.log("Query2 not Executed");
+      throw err;
+    } else {
+      console.log("Query2 Executed");
+      if (req.session.loggedin) {
+        res.render("index", {
+          result: result,
+          title: "|Food|",
+          user: "Be A ",
+          user2: "Foodie", // HOME
+          topic: "Home",
+          back: "/images/food2.jpg",
+          one: "Let's ",
+          two: "Eat Some ",
+          three: "Stuff",
+          des: "Logout"
+        });
+      } else {
+        res.render("index", {
+          result: result,
+          title: "|Food|",
+          user: "Be A ",
+          user2: "Foodie",
+          topic: "Home",
+          back: "/images/food2.jpg",
+          one: "Let's ",
+          two: "Eat Some ",
+          three: "Stuff",
+          des: "Log/Sign"
+        });
+      }
+    }
+  });
+});
+//ENTERTAINMENT
+app.get("/category/entertainment", (req, res) => {
+  var sql2 = "SELECT * FROM catnav WHERE Category=3 ORDER BY Time Desc";
+  connection.query(sql2, (err, result, field) => {
+    if (err) {
+      console.log("Query2 not Executed");
+      throw err;
+    } else {
+      console.log("Query2 Executed");
+      if (req.session.loggedin) {
+        res.render("index", {
+          result: result,
+          title: "|Entertainment|",
+          user: "Movie ",
+          user2: "Time ", // HOME
+          topic: "",
+          back: "/images/entertainment2.jpg",
+          one: "Make ",
+          two: "Your Life ",
+          three: "Entertaining",
+          des: "Logout"
+        });
+      } else {
+        res.render("index", {
+          result: result,
+          title: "|Entertainment|",
+          user: "Movie ",
+          user2: "Time ",
+          topic: "",
+          back: "/images/entertainment2.jpg",
+          one: "Make ",
+          two: "Your Life ",
+          three: "Entertaining",
+          des: "Log/Sign"
+        });
+      }
+    }
+  });
+});
+//COMMERCE
+app.get("/category/commerce", (req, res) => {
+  var sql2 = "SELECT * FROM catnav WHERE Category=4 ORDER BY Time Desc";
+  connection.query(sql2, (err, result, field) => {
+    if (err) {
+      console.log("Query2 not Executed");
+      throw err;
+    } else {
+      console.log("Query2 Executed");
+      if (req.session.loggedin) {
+        res.render("index", {
+          result: result,
+          title: "|COMMERCE|",
+          user: "Make ",
+          user2: "Money", // HOME
+          topic: "Home",
+          back: "/images/commerce2.jpg",
+          one: "Give ",
+          two: "Yourself A ",
+          three: "Piechart",
+          des: "Logout"
+        });
+      } else {
+        res.render("index", {
+          result: result,
+          title: "|COMMERCE|",
+          user: "Make ",
+          user2: "Money",
+          topic: "Home",
+          back: "/images/commerce2.jpg",
+          one: "Give ",
+          two: "Yourself A ",
+          three: "Piechart",
+          des: "Log/Sign"
+        });
+      }
+    }
+  });
+});
+//TRAVEL
+app.get("/category/travel", (req, res) => {
+  var sql2 = "SELECT * FROM catnav WHERE Category=1 ORDER BY Time Desc";
+  connection.query(sql2, (err, result, field) => {
+    if (err) {
+      console.log("Query2 not Executed");
+      throw err;
+    } else {
+      console.log("Query2 Executed");
+      if (req.session.loggedin) {
+        res.render("index", {
+          result: result,
+          title: "|Travel|",
+          user: "Go ",
+          user2: "Travel", // HOME
+          topic: "Home",
+          back: "/images/travel2.jpg",
+          one: "Don't ",
+          two: "Stop Just ",
+          three: "Travel",
+          des: "Logout"
+        });
+      } else {
+        res.render("index", {
+          result: result,
+          title: "|Travel|",
+          user: "Go ",
+          user2: "Travel",
+          topic: "Home",
+          back: "/images/travel2.jpg",
+          one: "Don't ",
+          two: "Stop Just ",
+          three: "Travel",
+          des: "Log/Sign"
+        });
+      }
+    }
+  });
+});
+//SCIENCE AND TECHNOLOGY
+app.get("/category/science", (req, res) => {
+  var sql2 = "SELECT * FROM catnav WHERE Category=5 ORDER BY Time Desc";
+  connection.query(sql2, (err, result, field) => {
+    if (err) {
+      console.log("Query2 not Executed");
+      throw err;
+    } else {
+      console.log("Query2 Executed");
+      if (req.session.loggedin) {
+        res.render("index", {
+          result: result,
+          title: "|Science and Technology|",
+          user: "Man It's ",
+          user2: "Science", // HOME
+          topic: "Home",
+          back: "/images/science2.jpg",
+          one: "How  ",
+          two: "Much you scored in",
+          three: "Science",
+          des: "Logout"
+        });
+      } else {
+        res.render("index", {
+          result: result,
+          title: "|Science and Technology|",
+          user: "Man It's ",
+          user2: "Science",
+          topic: "Home",
+          back: "/images/science2.jpg",
+          one: "How  ",
+          two: "Much you scored in",
+          three: "Science",
+          des: "Log/Sign"
+        });
+      }
+    }
+  });
+});
+
+//OTHERS
+
+app.get("/category/others", (req, res) => {
+  var sql2 = "SELECT * FROM catnav WHERE Category=6 ORDER BY Time Desc";
+  connection.query(sql2, (err, result, field) => {
+    if (err) {
+      console.log("Query2 not Executed");
+      throw err;
+    } else {
+      console.log("Query2 Executed");
+      if (req.session.loggedin) {
+        res.render("index", {
+          result: result,
+          title: "|Others|",
+          user: "Something ",
+          user2: "Different", // HOME
+          topic: "Home",
+          back: "/images/boxes2.jpg",
+          one: "Let's ",
+          two: "Explore",
+          three: "Something New",
+          des: "Logout"
+        });
+      } else {
+        res.render("index", {
+          result: result,
+          title: "|Others|",
+          user: "Something ",
+          user2: "Different",
+          topic: "Home",
+          back: "/images/boxes2.jpg",
+          one: "Let's ",
+          two: "Explore",
+          three: "Something New",
           des: "Log/Sign"
         });
       }
@@ -378,17 +655,155 @@ app.get("/blog/:BId?", (req, res) => {
       res.redirect("/myBlogs");
     } else {
       if (req.session.loggedin) {
-        res.render("blogs", {
-          result: result,
-          title: "|Blogs|",
-          des: "Logout"
-        });
+        switch (result[0].Category) {
+          case 0:
+            {
+              res.render("blogs", {
+                result: result,
+                title: "|Fashion Blog|",
+                des: "Logout",
+                back: "/images/fashion3.jpg"
+              });
+            }
+            break;
+          case 1: {
+            res.render("blogs", {
+              result: result,
+              title: "| Travel Blog|",
+              des: "Logout",
+              back: "/images/travel3.jpg"
+            });
+          }
+          case 2:
+            {
+              res.render("blogs", {
+                result: result,
+                title: "|Food Blog|",
+                des: "Logout",
+                back: "/images/food3.jpg"
+              });
+            }
+
+            break;
+
+          case 3:
+            {
+              res.render("blogs", {
+                result: result,
+                title: "|Entertainment Blog|",
+                des: "Logout",
+                back: "/images/entertainment3.jpg"
+              });
+            }
+            break;
+
+          case 4:
+            {
+              res.render("blogs", {
+                result: result,
+                title: "|Bussiness Blog|",
+                des: "Logout",
+                back: "/images/commerce3.jpg"
+              });
+            }
+            break;
+
+          case 5:
+            {
+              res.render("blogs", {
+                result: result,
+                title: "|Science Blog|",
+                des: "Logout",
+                back: "/images/science3.jpg"
+              });
+            }
+            break;
+
+          default: {
+            res.render("blogs", {
+              result: result,
+              title: "|Blog|",
+              des: "Logout",
+              back: "/images/blogs.jpg"
+            });
+          }
+        }
       } else {
-        res.render("blogs", {
-          result: result,
-          title: "|Blogs|",
-          des: "Log/Sign"
-        });
+        switch (result[0].Category) {
+          case 0:
+            {
+              res.render("blogs", {
+                result: result,
+                title: "|Fashion Blog|",
+                des: "Log/Sign",
+                back: "/images/fashion3.jpg"
+              });
+            }
+            break;
+          case 1:
+            {
+              res.render("blogs", {
+                result: result,
+                title: "|Travel Blog|",
+                des: "Log/Sign",
+                back: "/images/travel3.jpg"
+              });
+            }
+            break;
+          case 2:
+            {
+              res.render("blogs", {
+                result: result,
+                title: "|Food Blog|",
+                des: "Log/Sign",
+                back: "/images/food3.jpg"
+              });
+            }
+
+            break;
+
+          case 3:
+            {
+              res.render("blogs", {
+                result: result,
+                title: "|Entertainment Blog|",
+                des: "Log/Sign",
+                back: "/images/entertainment3.jpg"
+              });
+            }
+            break;
+
+          case 4:
+            {
+              res.render("blogs", {
+                result: result,
+                title: "|Bussiness Blog|",
+                des: "Log/Sign",
+                back: "/images/commerce3.jpg"
+              });
+            }
+            break;
+
+          case 5:
+            {
+              res.render("blogs", {
+                result: result,
+                title: "|Science Blog|",
+                des: "Log/Sign",
+                back: "/images/science3.jpg"
+              });
+            }
+            break;
+
+          default: {
+            res.render("blogs", {
+              result: result,
+              title: "|Blog|",
+              des: "Log/Sign",
+              back: "/images/blogs.jpg"
+            });
+          }
+        }
       }
     }
   });
@@ -420,6 +835,46 @@ app.get("/delete/:BId?", (req, res) => {
   } else {
     res.send("You are Unauthorized here");
   }
+});
+//CATEGORY
+
+app.get("/category", (req, res) => {
+  var sql2 = "SELECT * FROM catnav ORDER BY Time Desc";
+  connection.query(sql2, (err, result, field) => {
+    if (err) {
+      console.log("Query2 not Executed");
+      throw err;
+    } else {
+      console.log("Query2 Executed");
+      if (req.session.loggedin) {
+        res.render("category", {
+          result: result,
+          title: "|Home|",
+          user: "Welcome ",
+          user2: req.session.user,
+          topic: "Home",
+          back: "images/body_back.jpg",
+          one: "Write ",
+          two: "what you can't",
+          three: "Say",
+          des: "Logout"
+        });
+      } else {
+        res.render("category", {
+          result: result,
+          title: "|Home|",
+          user: "Welcome ",
+          user2: " Guest",
+          topic: "Home",
+          back: "images/body_back.jpg",
+          one: "Write ",
+          two: "what you can't",
+          three: "Say",
+          des: "Log/Sign"
+        });
+      }
+    }
+  });
 });
 
 //EDIT THE BLOG

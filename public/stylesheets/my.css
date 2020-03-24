@@ -421,7 +421,7 @@ nav ul li {
   letter-spacing: 3px;
 }
 .view {
-  background: rgba(232, 168, 124, 0.8);
+  background: rgba(0, 0, 0, 0.7);
   padding: 40px;
   width: 40em;
   margin-top: 3em;
@@ -435,7 +435,7 @@ nav ul li {
   font-family: "Viga", sans-serif;
   letter-spacing: 2px;
   font-size: 20px;
-  border: 1px solid black;
+  border: 1px solid white;
   transition: 0.5s all ease-in-out;
 }
 .view:hover {
