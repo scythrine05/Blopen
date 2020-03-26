@@ -16,7 +16,8 @@ const connection = mysql.createConnection({
   host: "localhost",
   password: "",
   user: "root",
-  database: "blopen"
+  database: "blopen",
+  multipleStatements: true
 });
 
 //CREATE STORAGE FOR PICTURE STORAGE
@@ -49,7 +50,7 @@ function checkFileType(file, cb) {
   if (mimetype && extname) {
     return cb(null, true);
   } else {
-    console.log("Images only");
+    cb("Images Only");
   }
 }
 
@@ -94,7 +95,8 @@ app.get("/", (req, res) => {
           one: "Write ",
           two: "what you can't",
           three: "Say",
-          des: "Logout"
+          des: "Logout",
+          file: `/images/uploaded/${req.session.pic}`
         });
       } else {
         res.render("index", {
@@ -106,7 +108,8 @@ app.get("/", (req, res) => {
           one: "Write ",
           two: "what you can't",
           three: "Say",
-          des: "Log/Sign"
+          des: "Log/Sign",
+          file: `/images/uploaded/${req.session.pic}`
         });
       }
     }
@@ -132,7 +135,8 @@ app.get("/category/fashion", (req, res) => {
           one: "Let's ",
           two: "Dress ",
           three: "Up",
-          des: "Logout"
+          des: "Logout",
+          file: `/images/uploaded/${req.session.pic}`
         });
       } else {
         res.render("index", {
@@ -144,7 +148,8 @@ app.get("/category/fashion", (req, res) => {
           one: "Let's ",
           two: "Dress ",
           three: "Up",
-          des: "Log/Sign"
+          des: "Log/Sign",
+          file: `/images/uploaded/${req.session.pic}`
         });
       }
     }
@@ -168,7 +173,8 @@ app.get("/category/food", (req, res) => {
           one: "Let's ",
           two: "Eat Some ",
           three: "Stuff",
-          des: "Logout"
+          des: "Logout",
+          file: `/images/uploaded/${req.session.pic}`
         });
       } else {
         res.render("index", {
@@ -180,7 +186,8 @@ app.get("/category/food", (req, res) => {
           one: "Let's ",
           two: "Eat Some ",
           three: "Stuff",
-          des: "Log/Sign"
+          des: "Log/Sign",
+          file: `/images/uploaded/${req.session.pic}`
         });
       }
     }
@@ -204,7 +211,8 @@ app.get("/category/entertainment", (req, res) => {
           one: "Make ",
           two: "Your Life ",
           three: "Entertaining",
-          des: "Logout"
+          des: "Logout",
+          file: `/images/uploaded/${req.session.pic}`
         });
       } else {
         res.render("index", {
@@ -216,7 +224,8 @@ app.get("/category/entertainment", (req, res) => {
           one: "Make ",
           two: "Your Life ",
           three: "Entertaining",
-          des: "Log/Sign"
+          des: "Log/Sign",
+          file: `/images/uploaded/${req.session.pic}`
         });
       }
     }
@@ -240,7 +249,8 @@ app.get("/category/commerce", (req, res) => {
           one: "Give ",
           two: "Yourself A ",
           three: "Piechart",
-          des: "Logout"
+          des: "Logout",
+          file: `/images/uploaded/${req.session.pic}`
         });
       } else {
         res.render("index", {
@@ -252,7 +262,8 @@ app.get("/category/commerce", (req, res) => {
           one: "Give ",
           two: "Yourself A ",
           three: "Piechart",
-          des: "Log/Sign"
+          des: "Log/Sign",
+          file: `/images/uploaded/${req.session.pic}`
         });
       }
     }
@@ -276,7 +287,8 @@ app.get("/category/travel", (req, res) => {
           one: "Don't ",
           two: "Stop Just ",
           three: "Travel",
-          des: "Logout"
+          des: "Logout",
+          file: `/images/uploaded/${req.session.pic}`
         });
       } else {
         res.render("index", {
@@ -288,7 +300,8 @@ app.get("/category/travel", (req, res) => {
           one: "Don't ",
           two: "Stop Just ",
           three: "Travel",
-          des: "Log/Sign"
+          des: "Log/Sign",
+          file: `/images/uploaded/${req.session.pic}`
         });
       }
     }
@@ -312,7 +325,8 @@ app.get("/category/science", (req, res) => {
           one: "How  ",
           two: "Much you scored in",
           three: "Science",
-          des: "Logout"
+          des: "Logout",
+          file: `/images/uploaded/${req.session.pic}`
         });
       } else {
         res.render("index", {
@@ -324,7 +338,8 @@ app.get("/category/science", (req, res) => {
           one: "How  ",
           two: "Much you scored in",
           three: "Science",
-          des: "Log/Sign"
+          des: "Log/Sign",
+          file: `/images/uploaded/${req.session.pic}`
         });
       }
     }
@@ -350,7 +365,8 @@ app.get("/category/others", (req, res) => {
           one: "Let's ",
           two: "Explore",
           three: "Something New",
-          des: "Logout"
+          des: "Logout",
+          file: `/images/uploaded/${req.session.pic}`
         });
       } else {
         res.render("index", {
@@ -362,7 +378,8 @@ app.get("/category/others", (req, res) => {
           one: "Let's ",
           two: "Explore",
           three: "Something New",
-          des: "Log/Sign"
+          des: "Log/Sign",
+          file: `/images/uploaded/${req.session.pic}`
         });
       }
     }
@@ -391,7 +408,7 @@ var month = new Date().getMonth();
 
 app.post("/new", (req, res) => {
   var sql1 =
-    "INSERT INTO catnav(Id,Heading,Paragraph,Day,Month,Year,Category) values(?,?,?,?,?,?,?)";
+    "INSERT INTO catnav(Id,Heading,Paragraph,Day,Month,Year,Category,Img) values(?,?,?,?,?,?,?,?)";
   if (req.body.head && req.body.para && req.body.category) {
     connection.query(
       sql1,
@@ -402,7 +419,8 @@ app.post("/new", (req, res) => {
         new Date().getDate(),
         mon[month],
         new Date().getFullYear(),
-        req.body.category
+        req.body.category,
+        req.session.pic
       ],
       (err, result, field) => {
         if (err) {
@@ -413,13 +431,18 @@ app.post("/new", (req, res) => {
       }
     );
   } else {
-    res.render("post", { des: "Logout", warn: "Fields should no be Empty" });
+    res.render("post", {
+      des: "Logout",
+      warn: "Fields should no be Empty",
+      file: `/images/uploaded/${req.session.pic}`
+    });
   }
 });
 //Account
 app.get("/account", (req, res) => {
   if (req.session.loggedin) {
     req.session.loggedin = false;
+    req.session.pic = "";
     res.redirect("/");
   } else {
     res.render("silog", {
@@ -443,6 +466,8 @@ app.post("/login", (req, res) => {
         req.session.loggedin = true;
         req.session.user = results[0].Name;
         req.session.email = results[0].Email;
+        req.session.pic = results[0].Image;
+        console.log(req.session.pic);
         res.redirect("/");
       } else {
         res.render("silog", {
@@ -535,6 +560,7 @@ app.post(
                     req.session.user = resu[0].Name;
                     req.session.id = resu[0].Id;
                     req.session.email = resu[0].Email;
+                    req.session.Image = resu[0].Image;
                     res.redirect("/");
                   }
                 });
@@ -546,17 +572,16 @@ app.post(
     }
   }
 );
-app.get("/upload", (req, res) => {
-  res.render("profile", {
-    title: "|Profile_Picture|"
-  });
-});
 
 //POSTING BLOG
 
 app.get("/post", (req, res) => {
   if (req.session.loggedin) {
-    res.render("post", { des: "Logout", warn: "" });
+    res.render("post", {
+      des: "Logout",
+      warn: "",
+      file: `/images/uploaded/${req.session.pic}`
+    });
   } else {
     res.redirect("/account");
   }
@@ -583,7 +608,8 @@ app.get("/trending", (req, res) => {
           one: "S0 ",
           two: "what's",
           three: "Trending",
-          des: "Logout"
+          des: "Logout",
+          file: `/images/uploaded/${req.session.pic}`
         });
       } else {
         res.render("index", {
@@ -596,7 +622,8 @@ app.get("/trending", (req, res) => {
           one: "S0 ",
           two: "what's",
           three: "Trending",
-          des: "Log/Sign"
+          des: "Log/Sign",
+          file: `/images/uploaded/${req.session.pic}`
         });
       }
     }
@@ -623,7 +650,8 @@ app.get("/myBlogs", (req, res) => {
           one: " Let's See ",
           two: "what I ",
           three: "wrote",
-          des: "Logout"
+          des: "Logout",
+          file: `/images/uploaded/${req.session.pic}`
         });
       }
     });
@@ -653,7 +681,8 @@ app.get("/blog/:BId?", (req, res) => {
                 result: result,
                 title: "|Fashion Blog|",
                 des: "Logout",
-                back: "/images/fashion3.jpg"
+                back: "/images/fashion3.jpg",
+                file: `/images/uploaded/${req.session.pic}`
               });
             }
             break;
@@ -663,7 +692,8 @@ app.get("/blog/:BId?", (req, res) => {
                 result: result,
                 title: "| Travel Blog|",
                 des: "Logout",
-                back: "/images/travel3.jpg"
+                back: "/images/travel3.jpg",
+                file: `/images/uploaded/${req.session.pic}`
               });
             }
             break;
@@ -673,7 +703,8 @@ app.get("/blog/:BId?", (req, res) => {
                 result: result,
                 title: "|Food Blog|",
                 des: "Logout",
-                back: "/images/food3.jpg"
+                back: "/images/food3.jpg",
+                file: `/images/uploaded/${req.session.pic}`
               });
             }
 
@@ -685,7 +716,8 @@ app.get("/blog/:BId?", (req, res) => {
                 result: result,
                 title: "|Entertainment Blog|",
                 des: "Logout",
-                back: "/images/entertainment3.jpg"
+                back: "/images/entertainment3.jpg",
+                file: `/images/uploaded/${req.session.pic}`
               });
             }
             break;
@@ -696,7 +728,8 @@ app.get("/blog/:BId?", (req, res) => {
                 result: result,
                 title: "|Bussiness Blog|",
                 des: "Logout",
-                back: "/images/commerce3.jpg"
+                back: "/images/commerce3.jpg",
+                file: `/images/uploaded/${req.session.pic}`
               });
             }
             break;
@@ -707,7 +740,8 @@ app.get("/blog/:BId?", (req, res) => {
                 result: result,
                 title: "|Science Blog|",
                 des: "Logout",
-                back: "/images/science3.jpg"
+                back: "/images/science3.jpg",
+                file: `/images/uploaded/${req.session.pic}`
               });
             }
             break;
@@ -717,7 +751,8 @@ app.get("/blog/:BId?", (req, res) => {
               result: result,
               title: "|Blog|",
               des: "Logout",
-              back: "/images/blogs.jpg"
+              back: "/images/blogs.jpg",
+              file: `/images/uploaded/${req.session.pic}`
             });
           }
         }
@@ -729,7 +764,8 @@ app.get("/blog/:BId?", (req, res) => {
                 result: result,
                 title: "|Fashion Blog|",
                 des: "Log/Sign",
-                back: "/images/fashion3.jpg"
+                back: "/images/fashion3.jpg",
+                file: `/images/uploaded/${req.session.pic}`
               });
             }
             break;
@@ -739,7 +775,8 @@ app.get("/blog/:BId?", (req, res) => {
                 result: result,
                 title: "|Travel Blog|",
                 des: "Log/Sign",
-                back: "/images/travel3.jpg"
+                back: "/images/travel3.jpg",
+                file: `/images/uploaded/${req.session.pic}`
               });
             }
             break;
@@ -749,7 +786,8 @@ app.get("/blog/:BId?", (req, res) => {
                 result: result,
                 title: "|Food Blog|",
                 des: "Log/Sign",
-                back: "/images/food3.jpg"
+                back: "/images/food3.jpg",
+                file: `/images/uploaded/${req.session.pic}`
               });
             }
 
@@ -761,7 +799,8 @@ app.get("/blog/:BId?", (req, res) => {
                 result: result,
                 title: "|Entertainment Blog|",
                 des: "Log/Sign",
-                back: "/images/entertainment3.jpg"
+                back: "/images/entertainment3.jpg",
+                file: `/images/uploaded/${req.session.pic}`
               });
             }
             break;
@@ -772,7 +811,8 @@ app.get("/blog/:BId?", (req, res) => {
                 result: result,
                 title: "|Bussiness Blog|",
                 des: "Log/Sign",
-                back: "/images/commerce3.jpg"
+                back: "/images/commerce3.jpg",
+                file: `/images/uploaded/${req.session.pic}`
               });
             }
             break;
@@ -783,7 +823,8 @@ app.get("/blog/:BId?", (req, res) => {
                 result: result,
                 title: "|Science Blog|",
                 des: "Log/Sign",
-                back: "/images/science3.jpg"
+                back: "/images/science3.jpg",
+                file: `/images/uploaded/${req.session.pic}`
               });
             }
             break;
@@ -793,7 +834,8 @@ app.get("/blog/:BId?", (req, res) => {
               result: result,
               title: "|Blog|",
               des: "Log/Sign",
-              back: "/images/blogs.jpg"
+              back: "/images/blogs.jpg",
+              file: `/images/uploaded/${req.session.pic}`
             });
           }
         }
@@ -842,7 +884,7 @@ app.get("/category", (req, res) => {
       if (req.session.loggedin) {
         res.render("category", {
           result: result,
-          title: "|Home|",
+          title: "|Category|",
           user: "Welcome ",
           user2: req.session.user,
           topic: "Home",
@@ -850,12 +892,13 @@ app.get("/category", (req, res) => {
           one: "Write ",
           two: "what you can't",
           three: "Say",
-          des: "Logout"
+          des: "Logout",
+          file: `/images/uploaded/${req.session.pic}`
         });
       } else {
         res.render("category", {
           result: result,
-          title: "|Home|",
+          title: "|Category|",
           user: "Welcome ",
           user2: " Guest",
           topic: "Home",
@@ -863,7 +906,8 @@ app.get("/category", (req, res) => {
           one: "Write ",
           two: "what you can't",
           three: "Say",
-          des: "Log/Sign"
+          des: "Log/Sign",
+          file: `/images/uploaded/${req.session.pic}`
         });
       }
     }
@@ -881,7 +925,12 @@ app.get("/edit/:BId?", (req, res) => {
         res.send("Blog Dosen't Exisit");
       } else {
         if (req.session.user == result[0].Id) {
-          res.render("edit", { des: "Logout", result: result, warn: "" });
+          res.render("edit", {
+            des: "Logout",
+            result: result,
+            warn: "",
+            file: `/images/uploaded/${req.session.pic}`
+          });
         } else {
           res.send("You are Unauthorized here");
         }
@@ -921,7 +970,8 @@ app.post("/edited/:BId?", (req, res) => {
             res.render("edit", {
               des: "Logout",
               result: result,
-              warn: "Fields Should not be empty"
+              warn: "Fields Should not be empty",
+              file: `/images/uploaded/${req.session.pic}`
             });
           }
         } else {
@@ -939,17 +989,54 @@ app.get("/profile", (req, res) => {
   if (req.session.loggedin) {
     var sql = "SELECT * FROM catnav WHERE Id= ?";
     connection.query(sql, [req.session.user], (err, result) => {
+      req.session.count = result.length;
       res.render("profile", {
         title: "|Profile|",
         des: "Logout",
         user: req.session.user,
         email: req.session.email,
-        num: result.length
+        num: result.length,
+        file: `/images/uploaded/${req.session.pic}`,
+        msg: ""
       });
     });
   } else {
     res.redirect("/account");
   }
+});
+//PICTURE UPLOAD SECTION
+app.post("/upload_pic", (req, res) => {
+  upload(req, res, err => {
+    var sql = "UPDATE silog SET Image=? WHERE Name=?";
+    var sql2 = "UPDATE catnav SET Img=? WHERE Id=?";
+
+    if (err) {
+      res.render("profile", {
+        title: "|Profile|",
+        des: "Logout",
+        user: req.session.user,
+        email: req.session.email,
+        num: req.session.count,
+        file: `/images/uploaded/${req.session.pic}`,
+        msg: err
+      });
+    } else {
+      connection.query(sql, [req.file.filename, req.session.user], er => {
+        connection.query(sql2, [req.file.filename, req.session.user], e => {
+          req.session.pic = req.file.filename;
+          res.render("profile", {
+            title: "|Profile|",
+            des: "Logout",
+            user: req.session.user,
+            email: req.session.email,
+            num: req.session.count,
+            file: `/images/uploaded/${req.session.pic}`,
+            msg: ""
+          });
+        });
+      });
+    }
+  });
 });
 
 //SERVER

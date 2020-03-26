@@ -81,7 +81,8 @@
       <a href="/account">
         <img
           id="guest"
-          src="/images/guest.png"
+          src="<%= typeof file != `undefined`? file : '' %>"
+          onerror="this.src='/images/guest.png';"
           height="60px"
           width="60px"
           alt="Account"
@@ -94,7 +95,8 @@
     <div class="body">
       <img
         id="guestx"
-        src="/images/guest.png"
+        src="/images/uploaded/<%= result[0].Img %>"
+        onerror="this.src='/images/guest.png';"
         height="75px"
         width="75px"
         alt="Account"

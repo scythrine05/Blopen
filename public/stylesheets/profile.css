@@ -84,6 +84,8 @@ header h1 {
   transition: all 0.5s ease-in-out;
   z-index: 2;
   transform: rotateY(360deg);
+  border-radius: 50%;
+  border: 2px solid white;
 }
 #guestx {
   opacity: 0;
@@ -287,6 +289,25 @@ nav ul li {
     width: 100%;
     height: 34em;
   }
+  body .body h2 {
+    font-size: 20px;
+  }
+  body .body #error {
+    font-size: 15px;
+  }
+  body .body .opt {
+    flex-direction: column;
+  }
+  body .body .opt a span {
+    font-size: 15px;
+  }
+  body .body .opt a #del {
+    position: relative;
+    top: 5em;
+    padding: 0.9em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
 }
 @media only screen and (max-width: 384px) {
   .nav-box:checked ~ nav {
@@ -306,7 +327,7 @@ nav ul li {
 .body {
   width: 60em;
   align-self: center;
-  height: 37em;
+  min-height: 45em;
   font-family: "vkts";
   color: white;
   text-align: center;
@@ -323,13 +344,14 @@ nav ul li {
 #profile {
   margin-top: 20px;
   transition: 0.5s all ease-in-out;
-  opacity: 1;
   cursor: pointer;
+  margin-left: 5em;
+  border-radius: 50%;
+  border: 5px white solid;
 }
 
 #profile:hover {
-  transform: rotateY(360deg);
-  opacity: 0;
+  transform: rotate(360deg);
 }
 #profile:hover ~ #dess {
   transform: rotateY(0deg);
@@ -350,6 +372,12 @@ nav ul li {
   transition: 0.5s all ease-in-out;
 }
 
+.body p {
+  font-family: "Ubuntu";
+  font-size: 17px;
+  margin-left: 1em;
+}
+
 .opt {
   font-family: "Ubuntu";
   display: flex;
@@ -364,6 +392,8 @@ nav ul li {
   border: 2px solid wheat;
   transition: 0.3s all ease-in-out;
   text-shadow: 1px 1px black;
+  font-weight: bold;
+  letter-spacing: 0.6px;
 }
 .opt a span:hover {
   box-shadow: inset -55px 55px wheat;

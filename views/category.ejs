@@ -81,7 +81,8 @@
       <a href="/account">
         <img
           id="guest"
-          src="images/guest.png"
+          src="<%= typeof file != `undefined`? file : '' %>"
+          onerror="this.src='/images/guest.png';"
           height="60px"
           width="60px"
           alt="Account"

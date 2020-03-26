@@ -79,6 +79,8 @@ header h1 {
   transition: all 0.5s ease-in-out;
   z-index: 2;
   transform: rotateY(360deg);
+  border-radius: 50%;
+  border: 2px solid white;
 }
 #guestx {
   opacity: 0;
@@ -232,6 +234,7 @@ nav ul li {
     margin-right: 20px;
     margin-top: 30px;
   }
+
   #guest:hover {
     transform: rotateY(0deg);
     opacity: 1;

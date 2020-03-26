@@ -83,6 +83,8 @@ header h1 {
   transition: all 0.56s ease-in-out;
   z-index: 2;
   transform: rotateY(360deg);
+  border-radius: 50%;
+  border: 2px solid white;
 }
 #guest:hover {
   transform: rotateY(0deg);
@@ -322,6 +324,11 @@ nav ul li {
   border: 1px solid black;
   padding-left: 2px;
   padding-bottom: 20px;
+}
+@-moz-document url-prefix() {
+  .post * {
+    margin-left: 1em;
+  }
 }
 
 .post h1 {

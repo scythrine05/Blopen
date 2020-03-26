@@ -75,7 +75,8 @@
       <a href="/account">
         <img
           id="guest"
-          src="/images/guest.png"
+          src="<%= typeof file != `undefined`? file : '' %>"
+          onerror="this.src='/images/guest.png';"
           height="60px"
           width="60px"
           alt="Account"
@@ -85,26 +86,45 @@
       <img src="/images/border.png" id="border" />
     </header>
     <div class="body">
-      <img
-        src="/images/guest.png"
-        alt="profile"
-        id="profile"
-        height="130px"
-        width="130px"
-      />
-      <span id="dess">Change</span>
-      <h2>Username : &nbsp <%= user %></h2>
-      <h2>Email : &nbsp<%= email %></h2>
-      <h2>Number of Blogs Posted : &nbsp<%= num %></h2>
+      <label for="file"
+        ><img
+          src="<%= typeof file != `undefined`? file : '' %>"
+          onerror="this.src='/images/guest.png';"
+          alt="profile"
+          id="profile"
+          height="150px"
+          width="150px"
+          accept="image/x-png,image/gif,image/jpeg"
+        />
+        <span id="dess">Change</span></label
+      >
+      <form
+        action="/upload_pic"
+        id="uppic"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <input type="file" name="myImage" id="file" style="display: none;" />
+      </form>
+      <p id="error" style="color:red;"><%= msg %></p>
+      <h2>&nbsp <%= user %></h2>
+      <h2>&nbsp<%= email %></h2>
+      <h2>&nbsp <%= num %> blogs posted</h2>
       <div class="opt">
-        <a href="#"><span>Edit Account</span></a>
-        <a href="#"><span>Delete Account</span></a>
+        <a href="#"><span>Edit &nbsp; Account</span></a>
+        <a href="#"><span id="del">Delete Account</span></a>
       </div>
     </div>
     <script>
       //This is avoid Flickering
     </script>
     <script type="text/javascript" src="/javascripts/look.js"></script>
+    <script type="text/javascript">
+      document.getElementById("uppic").onchange = function() {
+        // submitting the form
+        document.getElementById("uppic").submit();
+      };
+    </script>
     <footer></footer>
   </body>
 </html>

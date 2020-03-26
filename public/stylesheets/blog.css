@@ -77,6 +77,8 @@ header h1 {
   transition: all 0.56s ease-in-out;
   z-index: 2;
   transform: rotateY(360deg);
+  border-radius: 50%;
+  border: 2px solid white;
 }
 #guestx {
   margin-left: 3em;

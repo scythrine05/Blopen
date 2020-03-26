@@ -81,7 +81,8 @@
       <a href="/account">
         <img
           id="guest"
-          src="images/guest.png"
+          src="<%= typeof file != `undefined`? file : '' %>"
+          onerror="this.src='/images/guest.png';"
           height="60px"
           width="60px"
           alt="Account"
@@ -109,7 +110,8 @@
         <h3>
           <img
             id="guestx"
-            src="images/guest.png"
+            src="/images/uploaded/<%= result[i].Img %>"
+            onerror="this.src='/images/guest.png';"
             height="60px"
             width="60px"
             alt="Account"
@@ -129,7 +131,7 @@
           <a href="/delete/<%= result[i].BId %>"><span>Delete</span></a>
         </div>
         <p id="views" style="margin: 0; text-align: left; font-size: 12px;">
-          <%= result[i].views %><img
+          <%= result[i].views ? result[i].views : 0 %><img
             src="/images/views.png"
             height="20px"
             width="20px"

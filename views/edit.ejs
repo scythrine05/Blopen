@@ -49,7 +49,8 @@
           </ul>
         </nav>
         <a href="/account">
-          <img id="guest" src="<%= typeof file != 'undefined'? file: '/images/guest.png' %>" height="60px" width="60px"
+          <img id="guest" src="<%= typeof file != `undefined`? file : '' %>"
+          onerror="this.src='/images/guest.png';" height="60px" width="60px"
             alt="Account" />
             <span id="guest_des"><%= des %></span>
         </a>

@@ -132,6 +132,12 @@ header h1 {
   border-radius: 0% 5% 0% 5%;
 }
 
+@-moz-document url-prefix() {
+  .body input {
+    margin: 12.5px 0;
+  }
+}
+
 .error {
   position: absolute;
   margin-top: -2.5em;
