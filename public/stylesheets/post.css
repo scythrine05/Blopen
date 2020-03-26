@@ -283,6 +283,10 @@ nav ul li {
   #topic {
     font-size: 37px;
   }
+
+  .post #warn {
+    font-size: 14px;
+  }
   .post .sub-topic {
     font-size: 25px;
   }

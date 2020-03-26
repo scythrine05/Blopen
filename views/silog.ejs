@@ -43,6 +43,8 @@
           <p><%= msg2.Semail.msg %><% } %></p>
           <% if(msg2.Spass) { %>
           <p><%= msg2.Spass.msg %><% } %></p>
+          <% if(msg2.Sname) { %>
+          <p><%= msg2.Sname.msg %><% } %></p>
           <% if(msg2.Scpass) { %>
           <p><%= msg2.Scpass.msg %><% } %></p>
           <p><%= msg3 %></p>
@@ -59,7 +61,7 @@
         <input
           name="Semail"
           type="email"
-          placeholder="Email"
+          placeholder="Email@email.com"
           autocomplete="off"
         /><br />
         <input

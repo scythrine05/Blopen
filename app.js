@@ -9,10 +9,6 @@ const mysql = require("mysql");
 const ejs = require("ejs");
 const session = require("express-session");
 const multer = require("multer");
-var cookieParser = require("cookie-parser");
-var dialog = require("dialog");
-var flash = require("flash-express");
-var JSAlert = require("js-alert");
 
 // CREATE A CONNECTION
 
@@ -58,7 +54,6 @@ function checkFileType(file, cb) {
 }
 
 const app = express();
-app.use(flash());
 //EXPRESS SESSION
 app.use(
   session({
@@ -81,25 +76,20 @@ app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-//USING COOKIE-PARSER
-app.use(cookieParser());
 //LOCALHOST
 
 app.get("/", (req, res) => {
   var sql2 = "SELECT * FROM catnav ORDER BY Time Desc";
   connection.query(sql2, (err, result, field) => {
     if (err) {
-      console.log("Query2 not Executed");
-      throw err;
+      console.log("Error in index can't select from Catnav");
     } else {
-      console.log("Query2 Executed");
       if (req.session.loggedin) {
         res.render("index", {
           result: result,
           title: "|Home|",
           user: "Welcome ",
           user2: req.session.user, // HOME
-          topic: "Home",
           back: "/images/body_back.jpg",
           one: "Write ",
           two: "what you can't",
@@ -112,7 +102,6 @@ app.get("/", (req, res) => {
           title: "|Home|",
           user: "Welcome ",
           user2: " Guest", // HOME
-          topic: "Home",
           back: "/images/body_back.jpg",
           one: "Write ",
           two: "what you can't",
@@ -130,17 +119,15 @@ app.get("/category/fashion", (req, res) => {
   var sql2 = "SELECT * FROM catnav WHERE Category=0 ORDER BY Time Desc";
   connection.query(sql2, (err, result, field) => {
     if (err) {
-      console.log("Query2 not Executed");
+      console.log("Error in Fashion can't select from Catnav");
       throw err;
     } else {
-      console.log("Query2 Executed");
       if (req.session.loggedin) {
         res.render("index", {
           result: result,
           title: "|Fashion|",
           user: "Fashion ",
           user2: "World", // HOME
-          topic: "Home",
           back: "/images/fashion2.jpg",
           one: "Let's ",
           two: "Dress ",
@@ -153,7 +140,6 @@ app.get("/category/fashion", (req, res) => {
           title: "|Fashion|",
           user: "Fashion ",
           user2: " World", // HOME
-          topic: "Home",
           back: "/images/fashion2.jpg",
           one: "Let's ",
           two: "Dress ",
@@ -169,17 +155,15 @@ app.get("/category/food", (req, res) => {
   var sql2 = "SELECT * FROM catnav WHERE Category=2 ORDER BY Time Desc";
   connection.query(sql2, (err, result, field) => {
     if (err) {
-      console.log("Query2 not Executed");
+      console.log("Error in Food can't select from Catnav");
       throw err;
     } else {
-      console.log("Query2 Executed");
       if (req.session.loggedin) {
         res.render("index", {
           result: result,
           title: "|Food|",
           user: "Be A ",
           user2: "Foodie", // HOME
-          topic: "Home",
           back: "/images/food2.jpg",
           one: "Let's ",
           two: "Eat Some ",
@@ -192,7 +176,6 @@ app.get("/category/food", (req, res) => {
           title: "|Food|",
           user: "Be A ",
           user2: "Foodie",
-          topic: "Home",
           back: "/images/food2.jpg",
           one: "Let's ",
           two: "Eat Some ",
@@ -208,17 +191,15 @@ app.get("/category/entertainment", (req, res) => {
   var sql2 = "SELECT * FROM catnav WHERE Category=3 ORDER BY Time Desc";
   connection.query(sql2, (err, result, field) => {
     if (err) {
-      console.log("Query2 not Executed");
+      console.log("Error in Entertainment can't select from Catnav");
       throw err;
     } else {
-      console.log("Query2 Executed");
       if (req.session.loggedin) {
         res.render("index", {
           result: result,
           title: "|Entertainment|",
           user: "Movie ",
           user2: "Time ", // HOME
-          topic: "",
           back: "/images/entertainment2.jpg",
           one: "Make ",
           two: "Your Life ",
@@ -231,7 +212,6 @@ app.get("/category/entertainment", (req, res) => {
           title: "|Entertainment|",
           user: "Movie ",
           user2: "Time ",
-          topic: "",
           back: "/images/entertainment2.jpg",
           one: "Make ",
           two: "Your Life ",
@@ -247,17 +227,15 @@ app.get("/category/commerce", (req, res) => {
   var sql2 = "SELECT * FROM catnav WHERE Category=4 ORDER BY Time Desc";
   connection.query(sql2, (err, result, field) => {
     if (err) {
-      console.log("Query2 not Executed");
+      console.log("Error in Commerce can't select from Catnav");
       throw err;
     } else {
-      console.log("Query2 Executed");
       if (req.session.loggedin) {
         res.render("index", {
           result: result,
           title: "|COMMERCE|",
           user: "Make ",
           user2: "Money", // HOME
-          topic: "Home",
           back: "/images/commerce2.jpg",
           one: "Give ",
           two: "Yourself A ",
@@ -270,7 +248,6 @@ app.get("/category/commerce", (req, res) => {
           title: "|COMMERCE|",
           user: "Make ",
           user2: "Money",
-          topic: "Home",
           back: "/images/commerce2.jpg",
           one: "Give ",
           two: "Yourself A ",
@@ -286,17 +263,15 @@ app.get("/category/travel", (req, res) => {
   var sql2 = "SELECT * FROM catnav WHERE Category=1 ORDER BY Time Desc";
   connection.query(sql2, (err, result, field) => {
     if (err) {
-      console.log("Query2 not Executed");
+      console.log("Error in Travel can't select from Catnav");
       throw err;
     } else {
-      console.log("Query2 Executed");
       if (req.session.loggedin) {
         res.render("index", {
           result: result,
           title: "|Travel|",
           user: "Go ",
           user2: "Travel", // HOME
-          topic: "Home",
           back: "/images/travel2.jpg",
           one: "Don't ",
           two: "Stop Just ",
@@ -309,7 +284,6 @@ app.get("/category/travel", (req, res) => {
           title: "|Travel|",
           user: "Go ",
           user2: "Travel",
-          topic: "Home",
           back: "/images/travel2.jpg",
           one: "Don't ",
           two: "Stop Just ",
@@ -325,17 +299,15 @@ app.get("/category/science", (req, res) => {
   var sql2 = "SELECT * FROM catnav WHERE Category=5 ORDER BY Time Desc";
   connection.query(sql2, (err, result, field) => {
     if (err) {
-      console.log("Query2 not Executed");
+      console.log("Error in Sci/Tech can't select from Catnav");
       throw err;
     } else {
-      console.log("Query2 Executed");
       if (req.session.loggedin) {
         res.render("index", {
           result: result,
           title: "|Science and Technology|",
           user: "Man It's ",
           user2: "Science", // HOME
-          topic: "Home",
           back: "/images/science2.jpg",
           one: "How  ",
           two: "Much you scored in",
@@ -348,7 +320,6 @@ app.get("/category/science", (req, res) => {
           title: "|Science and Technology|",
           user: "Man It's ",
           user2: "Science",
-          topic: "Home",
           back: "/images/science2.jpg",
           one: "How  ",
           two: "Much you scored in",
@@ -366,17 +337,15 @@ app.get("/category/others", (req, res) => {
   var sql2 = "SELECT * FROM catnav WHERE Category=6 ORDER BY Time Desc";
   connection.query(sql2, (err, result, field) => {
     if (err) {
-      console.log("Query2 not Executed");
+      console.log("Error in Others can't select from Catnav");
       throw err;
     } else {
-      console.log("Query2 Executed");
       if (req.session.loggedin) {
         res.render("index", {
           result: result,
           title: "|Others|",
           user: "Something ",
           user2: "Different", // HOME
-          topic: "Home",
           back: "/images/boxes2.jpg",
           one: "Let's ",
           two: "Explore",
@@ -389,7 +358,6 @@ app.get("/category/others", (req, res) => {
           title: "|Others|",
           user: "Something ",
           user2: "Different",
-          topic: "Home",
           back: "/images/boxes2.jpg",
           one: "Let's ",
           two: "Explore",
@@ -424,7 +392,7 @@ var month = new Date().getMonth();
 app.post("/new", (req, res) => {
   var sql1 =
     "INSERT INTO catnav(Id,Heading,Paragraph,Day,Month,Year,Category) values(?,?,?,?,?,?,?)";
-  if (req.body.head && req.body.para) {
+  if (req.body.head && req.body.para && req.body.category) {
     connection.query(
       sql1,
       [
@@ -445,7 +413,7 @@ app.post("/new", (req, res) => {
       }
     );
   } else {
-    console.log("Write something");
+    res.render("post", { des: "Logout", warn: "Fields should no be Empty" });
   }
 });
 //Account
@@ -474,6 +442,7 @@ app.post("/login", (req, res) => {
       if (results.length > 0) {
         req.session.loggedin = true;
         req.session.user = results[0].Name;
+        req.session.email = results[0].Email;
         res.redirect("/");
       } else {
         res.render("silog", {
@@ -485,7 +454,6 @@ app.post("/login", (req, res) => {
           //LOGIN EMAIL PASSWORD DOES NOT MATCH
         });
       }
-      res.end();
     });
   } else {
     res.render("silog", {
@@ -503,13 +471,13 @@ app.post("/login", (req, res) => {
 app.post(
   "/signup",
   [
-    check("Sname", " Username max should be 15")
+    check("Sname", " Username maximum should be 15")
       .trim()
       .isLength({ max: 15 }),
     check("Semail", "Invalid Email")
       .trim()
       .isEmail(),
-    check("Spass", "Password min should be 8")
+    check("Spass", "Password minimum should be 8")
       .trim()
       .isLength({ min: 8 }),
     check("Scpass", "Confirm Password not matched").custom(
@@ -566,6 +534,7 @@ app.post(
                     req.session.loggedin = true;
                     req.session.user = resu[0].Name;
                     req.session.id = resu[0].Id;
+                    req.session.email = resu[0].Email;
                     res.redirect("/");
                   }
                 });
@@ -587,7 +556,7 @@ app.get("/upload", (req, res) => {
 
 app.get("/post", (req, res) => {
   if (req.session.loggedin) {
-    res.render("post", { des: "Logout" });
+    res.render("post", { des: "Logout", warn: "" });
   } else {
     res.redirect("/account");
   }
@@ -596,24 +565,40 @@ app.get("/post", (req, res) => {
 //TRENDING
 
 app.get("/trending", (req, res) => {
-  var sql2 = "SELECT * FROM catnav ORDER BY views";
+  var sql2 = "SELECT * FROM catnav ORDER BY views DESC,Time Desc";
   connection.query(sql2, (err, result, field) => {
     if (err) {
       console.log("Query2 not Executed");
       throw err;
     } else {
       console.log("Query2 Executed");
-      res.render("index", {
-        result: result,
-        title: "|Trending|",
-        user: "",
-        user2: "Trending",
-        topic: "Trending",
-        back: "images/trending.jpg",
-        one: "S0 ",
-        two: "what's",
-        three: "Trending"
-      });
+      if (req.session.loggedin) {
+        res.render("index", {
+          result: result,
+          title: "|Trending|",
+          user: "",
+          user2: "Trending",
+          topic: "Trending",
+          back: "images/trending.jpg",
+          one: "S0 ",
+          two: "what's",
+          three: "Trending",
+          des: "Logout"
+        });
+      } else {
+        res.render("index", {
+          result: result,
+          title: "|Trending|",
+          user: "",
+          user2: "Trending",
+          topic: "Trending",
+          back: "images/trending.jpg",
+          one: "S0 ",
+          two: "what's",
+          three: "Trending",
+          des: "Log/Sign"
+        });
+      }
     }
   });
 });
@@ -654,6 +639,12 @@ app.get("/blog/:BId?", (req, res) => {
       console.log("No such blog found");
       res.redirect("/myBlogs");
     } else {
+      var v = result[0].views;
+      v = v + 1;
+      connection.query("UPDATE catnav SET views=? WHERE BId=?", [
+        v,
+        req.params.BId
+      ]);
       if (req.session.loggedin) {
         switch (result[0].Category) {
           case 0:
@@ -666,14 +657,16 @@ app.get("/blog/:BId?", (req, res) => {
               });
             }
             break;
-          case 1: {
-            res.render("blogs", {
-              result: result,
-              title: "| Travel Blog|",
-              des: "Logout",
-              back: "/images/travel3.jpg"
-            });
-          }
+          case 1:
+            {
+              res.render("blogs", {
+                result: result,
+                title: "| Travel Blog|",
+                des: "Logout",
+                back: "/images/travel3.jpg"
+              });
+            }
+            break;
           case 2:
             {
               res.render("blogs", {
@@ -888,7 +881,7 @@ app.get("/edit/:BId?", (req, res) => {
         res.send("Blog Dosen't Exisit");
       } else {
         if (req.session.user == result[0].Id) {
-          res.render("edit", { des: "Logout", result: result });
+          res.render("edit", { des: "Logout", result: result, warn: "" });
         } else {
           res.send("You are Unauthorized here");
         }
@@ -910,19 +903,27 @@ app.post("/edited/:BId?", (req, res) => {
         res.send("Blog Dosen't Exisit");
       } else {
         if (req.session.user == result[0].Id) {
-          var sql2 =
-            "UPDATE catnav SET Heading=?,Paragraph=?,Category=? WHERE Bid=?";
-          connection.query(
-            sql2,
-            [req.body.head, req.body.para, req.body.category, req.params.BId],
-            e => {
-              if (e) {
-                res.send("Something went wrong");
-              } else {
-                res.redirect("/myBlogs");
+          if (req.body.head && req.body.para && req.body.category) {
+            var sql2 =
+              "UPDATE catnav SET Heading=?,Paragraph=?,Category=? WHERE Bid=?";
+            connection.query(
+              sql2,
+              [req.body.head, req.body.para, req.body.category, req.params.BId],
+              e => {
+                if (e) {
+                  res.send("Something went wrong");
+                } else {
+                  res.redirect("/myBlogs");
+                }
               }
-            }
-          );
+            );
+          } else {
+            res.render("edit", {
+              des: "Logout",
+              result: result,
+              warn: "Fields Should not be empty"
+            });
+          }
         } else {
           res.send("You are Unauthorized here");
         }
@@ -930,6 +931,24 @@ app.post("/edited/:BId?", (req, res) => {
     });
   } else {
     res.send("You are Unauthorized here");
+  }
+});
+//PROFILE
+
+app.get("/profile", (req, res) => {
+  if (req.session.loggedin) {
+    var sql = "SELECT * FROM catnav WHERE Id= ?";
+    connection.query(sql, [req.session.user], (err, result) => {
+      res.render("profile", {
+        title: "|Profile|",
+        des: "Logout",
+        user: req.session.user,
+        email: req.session.email,
+        num: result.length
+      });
+    });
+  } else {
+    res.redirect("/account");
   }
 });
 

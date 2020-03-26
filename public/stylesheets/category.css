@@ -285,10 +285,17 @@ nav ul li {
   body .body {
     width: 100%;
     min-height: 34em;
+    flex-wrap: nowrap;
   }
 
-  #greet {
-    font-size: 40px;
+  body .body h1 {
+    font-size: 37px;
+  }
+  body .body a div img {
+    filter: blur(3px);
+  }
+  body .body a div {
+    height: 24em;
   }
   body .body .i1::before,
   body .body .i2::before,
@@ -298,11 +305,13 @@ nav ul li {
   body .body .i6::before,
   body .body .i7::before {
     opacity: 1;
+    font-size: 23px;
   }
 }
 @media only screen and (max-width: 384px) {
   .nav-box:checked ~ nav {
     width: 11em;
+    top: 12em;
   }
 
   nav ul {
@@ -319,6 +328,11 @@ nav ul li {
   body .blogs #border3 {
     margin-top: -3em;
   }
+
+  body .body {
+    flex-direction: column;
+    width: 100%;
+  }
 }
 
 .body {
@@ -334,9 +348,10 @@ nav ul li {
   margin-top: 10em;
   padding: 0;
   overflow: hidden;
-  flex-direction: column;
   align-items: center;
   border: 1px solid white;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 .body h1 {
   font-size: 50px;

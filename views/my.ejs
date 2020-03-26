@@ -36,10 +36,12 @@
       <img id="border2" src="images/border 4.png" />
       <nav>
         <div class="social">
-          <a href="#">
+          <a
+            href="https://www.facebook.com/Blopen-101448211510349/?modal=admin_todo_tour"
+          >
             <img src="images/fb.png" height="55px" width="55px" alt="Fb"
           /></a>
-          <a href="#">
+          <a href="https://www.instagram.com/Blopen_Blogger/">
             <img src="images/insta.png" height="55px" width="55px" alt="Fb"
           /></a>
           <a href="#">
@@ -72,7 +74,7 @@
           </li>
 
           <li>
-            <a href="#"> About us </a>
+            <a href="/profile"> Profile </a>
           </li>
         </ul>
       </nav>
@@ -120,11 +122,20 @@
         <h2>
           <%= result[i].Heading %>
         </h2>
+
         <div class="opt">
           <a href="/edit/<%= result[i].BId %>"><span>Edit</span></a>
           <a href="/blog/<%= result[i].BId %>"><span>More</span></a>
           <a href="/delete/<%= result[i].BId %>"><span>Delete</span></a>
         </div>
+        <p id="views" style="margin: 0; text-align: left; font-size: 12px;">
+          <%= result[i].views %><img
+            src="/images/views.png"
+            height="20px"
+            width="20px"
+            style="margin-left: 0.5em; position: relative;top:5px;"
+          />
+        </p>
       </div>
       <% } }else{ %>
       <div class="view">
