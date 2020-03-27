@@ -305,14 +305,13 @@ nav ul li {
     font-size: 40px;
     margin-left: 30px;
   }
+  .blogs .view {
+    width: 28em;
+  }
   .view h2 {
     font-size: 23px;
   }
 
-  .blogs .view {
-    width: 11em;
-    margin-bottom: 3em;
-  }
   .blogs .view span {
     font-size: 12px;
   }
@@ -359,7 +358,12 @@ nav ul li {
     margin-top: -3em;
   }
 }
-
+@media only screen and (max-width: 700px) {
+  .blogs .view {
+    width: 11em;
+    margin-bottom: 3em;
+  }
+}
 .body {
   width: 60em;
   align-self: center;
