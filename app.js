@@ -66,7 +66,7 @@ app.use(
 );
 //DATABASE CONNECTED
 
-connection.connect(err => {
+connection.getConnection(err => {
   if (err) throw err;
   else console.log("Database Connected!");
 });
