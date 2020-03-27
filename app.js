@@ -659,18 +659,18 @@ app.get("/myBlogs", (req, res) => {
   }
 });
 //FULL BLOG VIEW
-app.get("/blog/:BId?", (req, res) => {
-  var sql = "SELECT * FROM catnav WHERE BId=?";
-  connection.query(sql, [req.params.BId], (err, result) => {
+app.get("/blog/:Bid?", (req, res) => {
+  var sql = "SELECT * FROM catnav WHERE Bid=?";
+  connection.query(sql, [req.params.Bid], (err, result) => {
     if (err) {
       console.log("No such blog found");
       res.redirect("/myBlogs");
     } else {
       var v = result[0].views;
       v = v + 1;
-      connection.query("UPDATE catnav SET views=? WHERE BId=?", [
+      connection.query("UPDATE catnav SET views=? WHERE Bid=?", [
         v,
-        req.params.BId
+        req.params.Bid
       ]);
       if (req.session.loggedin) {
         switch (result[0].Category) {
@@ -844,17 +844,17 @@ app.get("/blog/:BId?", (req, res) => {
 });
 //DELETE THE BLOG
 
-app.get("/delete/:BId?", (req, res) => {
-  var sql = "SELECT * FROM catnav WHERE BId=?";
+app.get("/delete/:Bid?", (req, res) => {
+  var sql = "SELECT * FROM catnav WHERE Bid=?";
   if (req.session.loggedin) {
-    connection.query(sql, [req.params.BId], (err, result) => {
+    connection.query(sql, [req.params.Bid], (err, result) => {
       console.log(req.session.user + " " + result[0].Id);
       if (err) {
         res.send("Blog Dosen't Exisit");
       } else {
         if (req.session.user == result[0].Id) {
-          var sql2 = "DELETE FROM catnav WHERE BId=?";
-          connection.query(sql2, [req.params.BId], er => {
+          var sql2 = "DELETE FROM catnav WHERE Bid=?";
+          connection.query(sql2, [req.params.Bid], er => {
             if (er) {
               res.send("Blog Dosen't Exisit");
             } else {
@@ -915,10 +915,10 @@ app.get("/category", (req, res) => {
 
 //EDIT THE BLOG
 
-app.get("/edit/:BId?", (req, res) => {
-  var sql = "SELECT * FROM catnav WHERE BId=?";
+app.get("/edit/:Bid?", (req, res) => {
+  var sql = "SELECT * FROM catnav WHERE Bid=?";
   if (req.session.loggedin) {
-    connection.query(sql, [req.params.BId], (err, result) => {
+    connection.query(sql, [req.params.Bid], (err, result) => {
       console.log(req.session.user + " " + result[0].Id);
       if (err) {
         res.send("Blog Dosen't Exisit");
@@ -942,10 +942,10 @@ app.get("/edit/:BId?", (req, res) => {
 
 //UPDATE THE BLOG
 
-app.post("/edited/:BId?", (req, res) => {
-  var sql = "SELECT * FROM catnav WHERE BId=?";
+app.post("/edited/:Bid?", (req, res) => {
+  var sql = "SELECT * FROM catnav WHERE Bid=?";
   if (req.session.loggedin) {
-    connection.query(sql, [req.params.BId], (err, result) => {
+    connection.query(sql, [req.params.Bid], (err, result) => {
       console.log(req.session.user + " " + result[0].Id);
       if (err) {
         res.send("Blog Dosen't Exisit");
@@ -956,7 +956,7 @@ app.post("/edited/:BId?", (req, res) => {
               "UPDATE catnav SET Heading=?,Paragraph=?,Category=? WHERE Bid=?";
             connection.query(
               sql2,
-              [req.body.head, req.body.para, req.body.category, req.params.BId],
+              [req.body.head, req.body.para, req.body.category, req.params.Bid],
               e => {
                 if (e) {
                   res.send("Something went wrong");
