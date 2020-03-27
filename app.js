@@ -12,6 +12,7 @@ const multer = require("multer");
 
 // CREATE A CONNECTION
 //b30de768ff88d7:9a431b69@us-cdbr-iron-east-01.cleardb.net/heroku_18b0797700c12ad?reconnect=true
+//mysql --host=us-cdbr-iron-east-01.cleardb.net --user=heroku_18b0797700c12ad --password=9a431b69 --reconnect heroku_18b0797700c12ad
 
 var connection = mysql.createPool({
   host: "us-cdbr-iron-east-01.cleardb.net",
@@ -73,7 +74,7 @@ connection.getConnection(err => {
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 //LOCALHOST
 
