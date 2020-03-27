@@ -13,7 +13,7 @@ const multer = require("multer");
 // CREATE A CONNECTION
 //b30de768ff88d7:9a431b69@us-cdbr-iron-east-01.cleardb.net/heroku_18b0797700c12ad?reconnect=true
 
-mysql: const connection = mysql.createConnection({
+mysql: var connection = mysql.createConnection({
   host: "us-cdbr-iron-east-01.cleardb.net",
   password: "9a431b69",
   user: "b30de768ff88d7",
