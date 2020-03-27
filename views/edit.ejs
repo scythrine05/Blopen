@@ -20,7 +20,7 @@
               <img src="/images/fb.png" height="55px" width="55px" alt="Fb" /></a>
             <a href="https://www.instagram.com/Blopen_Blogger/">
               <img src="/images/insta.png" height="55px" width="55px" alt="Fb" /></a>
-            <a href="#">
+            <a href="https://twitter.com/RohanMurmu14">
               <img src="/images/tweet.png" height="55px" width="55px" alt="Fb" />
             </a>
           </div>
@@ -59,7 +59,7 @@
       <div class="post">
     <h1 id="topic">Post Your<font color="#fba100"> Blog</font></h1>
     <br />
-    <form action="/edited/<%= result[0].BId %>" method="POST">
+    <form action="/edited/<%= result[0].Bid %>" method="POST">
       <h3 id="warn" style="color: red; font-family:'Ubuntu';font-weight: lighter;"><%= warn %></h3>
       <h2 class="sub-topic">Heading :</h2>
       <br />
@@ -79,7 +79,7 @@
       <label for="technology"><input id="technology" value="5" type="radio" name="category">Science and Technology</label>
       <label for="others"><input id="others" value="6" type="radio" name="category">Others</label>
       </h2>
-     <button id="po">POST</button>
+     <button id="po" type="submit">POST</button>
     </form>
     </div>
     <script>

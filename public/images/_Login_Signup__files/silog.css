@@ -1,0 +1,208 @@
+@font-face {
+  font-family: "Vkts";
+  src: url(../fonts/Pacifico-Regular.ttf);
+}
+@font-face {
+  font-family: "Ubuntu";
+  src: url(../fonts/Ubuntu-Regular.ttf);
+}
+
+* {
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: rgb(21, 32, 43);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+header {
+  width: 100%;
+  height: 5em;
+  padding: 20px 0px 20px 0;
+  color: white;
+  margin: 0;
+  background: rgba(65, 179, 163);
+}
+#icon {
+  float: left;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+header h1 {
+  font-family: "vkts";
+  float: left;
+  font-size: 50px;
+  letter-spacing: 1.5px;
+  margin-top: 0px;
+  margin-left: 10px;
+  text-shadow: black 1px 1px;
+}
+
+#border {
+  margin-top: -1.3em;
+  height: auto;
+  width: 100%;
+}
+
+@media only screen and (max-width: 470px) {
+  #border {
+    position: relative;
+    top: -11px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  header h1 {
+    font-size: 40px;
+    margin-top: 20px;
+  }
+
+  #icon {
+    height: 35px;
+    width: 35px;
+    margin-top: 2.5em;
+  }
+  #border {
+    margin-top: -1.2em;
+  }
+  .body {
+    flex-direction: column;
+  }
+
+  #log,
+  #sign {
+    margin-top: 10em;
+  }
+
+  #log,
+  #sign {
+    position: relative;
+    top: 10em;
+  }
+
+  #h1 {
+    white-space: nowrap;
+    font-size: 40px;
+  }
+  .body form input {
+    height: 3em;
+    width: 20em;
+    font-size: 15px;
+  }
+
+  .body form input::placeholder {
+    font-size: 14px;
+  }
+}
+
+.body {
+  width: 100%;
+  height: 40em;
+  font-family: "vkts";
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 8em;
+}
+
+#log,
+#sign {
+  text-shadow: 1px 1px black;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 30em;
+  padding: 40px 5em;
+  margin: 30px 0px;
+  transition: all 0.5s ease-in-out;
+  background: rgba(65, 179, 163);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  border-radius: 0% 5% 0% 5%;
+  border: 2px solid white;
+}
+
+@-moz-document url-prefix() {
+  .body input {
+    margin: 12.5px 0;
+  }
+}
+
+.error {
+  position: absolute;
+  margin-top: -2.5em;
+  line-height: 5px;
+  text-align: center;
+}
+
+form p {
+  font-family: "Ubuntu";
+  color: red;
+  text-shadow: none;
+  font-weight: bold;
+  white-space: normal;
+  font-size: 14px;
+}
+
+.body h1 {
+  font-size: 50px;
+}
+.body input {
+  height: 2em;
+  width: 20em;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  background: rgba(245, 222, 179, 0.5);
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  padding-left: 20px;
+  transition: all 0.3s ease-in-out;
+  font-family: "Ubuntu";
+}
+
+.body input::placeholder {
+  font-size: 15px;
+  font-family: "Ubuntu";
+  font-weight: bold;
+  color: lightslategray;
+  text-shadow: none;
+}
+
+.body button {
+  font-size: 20px;
+  font-family: "Ubuntu";
+  font-weight: bolder;
+  width: 7em;
+  height: 4em;
+  border: 2px solid #e8a87c;
+  transition: all 0.3s ease-in-out;
+  color: white;
+  cursor: pointer;
+  background: transparent;
+  text-shadow: 0.5px 0.5px #e8a87c;
+}
+.body button:hover {
+  box-shadow: inset 0px -85px #e8a87c;
+  color: white;
+}
+.body button:focus {
+  outline: none;
+}
+
+.body input:focus {
+  box-shadow: 0.1px 0.1px 5px black;
+  outline: none;
+}

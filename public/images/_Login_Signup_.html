@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://localhost:3000/account -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>|Login/Signup|</title>
+    <link rel="stylesheet" href="./_Login_Signup__files/silog.css" type="text/css">
+  </head>
+  <body>
+    <header>
+      <img id="icon" src="./_Login_Signup__files/icon.png" height="50px" width="50px" alt="icon">
+      <h1>Bl<font color="orange">o</font>pen</h1>
+      <img src="./_Login_Signup__files/border.png" id="border">
+    </header>
+    <div class="body">
+      <form id="log" action="http://localhost:3000/login" method="POST">
+        <div class="error">
+          <p></p>
+        </div>
+        <h1 id="h1">log<font color="orange">In</font></h1>
+        <br>
+        <input type="email" name="Lemail" placeholder="Email" autocomplete="off"><br>
+        <input type="password" name="Lpass" placeholder="Password"><br><br><button type="submit" id="Ssub">
+          Log in
+        </button>
+      </form>
+      <form id="sign" action="http://localhost:3000/signup" method="POST">
+        <div class="error">
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+        </div>
+        <h1 id="h1"><font color="orange">Sign</font> up</h1>
+        <input name="Sname" type="text" placeholder="Userame Maximum 15 letters" autocomplete="off">
+        <br>
+        <input name="Semail" type="email" placeholder="Email@email.com" autocomplete="off"><br>
+        <input name="Spass" type="password" placeholder="Password Minmum 8 letters"><br><input name="Scpass" type="password" placeholder="Confirm Password"><br><button type="submit" id="Ssub">Sign Up</button>
+      </form>
+    </div>
+    <script src="./_Login_Signup__files/jsalert.min.js.download"></script>
+    <script>
+      //This is to avoid Flickering
+    </script>
+  
+
+</body></html>

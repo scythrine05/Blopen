@@ -23,7 +23,7 @@
 body {
   padding: 0;
   margin: 0;
-  background: url(../images/profile.jpg);
+  background: rgb(21, 32, 43);
   overflow-y: scroll;
   overflow-x: hidden;
   display: flex;
@@ -40,7 +40,7 @@ header {
   padding: 20px 0px 20px 0;
   color: white;
   margin: 0;
-  background: rgba(65, 179, 163, 0.9);
+  background: rgba(65, 179, 163);
 }
 #icon {
   float: left;
@@ -333,7 +333,8 @@ nav ul li {
   text-align: center;
   display: flex;
   flex-direction: column;
-  background: rgba(108, 100, 139, 0.9);
+  background: rgba(108, 100, 139);
+  border: 2px solid white;
   margin-top: 10em;
   padding: 0;
   border-radius: 0% 15% 0% 15%;

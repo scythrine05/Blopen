@@ -9,10 +9,12 @@ const mysql = require("mysql");
 const ejs = require("ejs");
 const session = require("express-session");
 const multer = require("multer");
+const nodemailer = require("nodemailer");
+var inf;
 
 // CREATE A CONNECTION
 //b30de768ff88d7:9a431b69@us-cdbr-iron-east-01.cleardb.net/heroku_18b0797700c12ad?reconnect=true
-//mysql --host=us-cdbr-iron-east-01.cleardb.net --user=heroku_18b0797700c12ad --password=9a431b69 --reconnect heroku_18b0797700c12ad
+//mysql --host=us-cdbr-iron-east-01.cleardb.net --user=b30de768ff88d7 --password=9a431b69 --reconnect heroku_18b0797700c12ad
 
 var connection = mysql.createPool({
   host: "us-cdbr-iron-east-01.cleardb.net",
@@ -20,6 +22,16 @@ var connection = mysql.createPool({
   user: "b30de768ff88d7",
   database: "heroku_18b0797700c12ad",
   multipleStatements: true
+});
+
+//CREATE TRANSPORTER FOR NODEMAILER
+
+var transport = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "blopen.blogger@gmail.com",
+    pass: "rohanmessibuddy"
+  }
 });
 
 //CREATE STORAGE FOR PICTURE STORAGE
@@ -538,34 +550,37 @@ app.post(
           });
           console.log("Username already Exist");
         } else {
-          var sql = "INSERT INTO silog(Name,Password,Email) VALUES(?,?,?)";
-          connection.query(
-            sql,
-            [req.body.Sname, req.body.Spass, req.body.Semail],
-            (err, result, fields) => {
-              if (err) {
-                res.render("silog", {
-                  title: "|Log/Sign|" //ERROR IN DATABASE INSERTION
-                });
-                console.log("Error in Insertion");
-              } else {
-                var sql2 = "SELECT * FROM silog WHERE Email=?";
+          var mail = {
+            from: "blopen.blogger@gmail.com",
+            to: req.body.Semail,
+            subject: "Blopen: Email Verification",
+            html:
+              "<h2>Thank you for joining Blopen, We'll hope you will enjoy using it </h2><br/><h4> Your Code:  " +
+              "@$123" +
+              req.body.Sname +
+              "%66" +
+              "</h4>"
+          };
 
-                connection.query(sql2, [req.body.Semail], (error, resu) => {
-                  if (error) {
-                    throw error; //ERROR IN FINDING EMAIL
-                  } else {
-                    req.session.loggedin = true;
-                    req.session.user = resu[0].Name;
-                    req.session.id = resu[0].Id;
-                    req.session.email = resu[0].Email;
-                    req.session.Image = resu[0].Image;
-                    res.redirect("/");
-                  }
-                });
-              }
+          transport.sendMail(mail, (ee, info) => {
+            if (ee) {
+              res.render("silog", {
+                title: "|Log/Sign|",
+                msg: "",
+                msg2: "",
+                msg3: "Invalid Email",
+                msg4: "" // USERNAME ALREADY EXIST
+              });
+            } else {
+              inf = [
+                req.body.Semail,
+                req.body.Spass,
+                req.body.Sname,
+                "@$123" + req.body.Sname + "%66"
+              ];
+              res.redirect("/Verify_mail");
             }
-          );
+          });
         }
       });
     }
@@ -750,7 +765,7 @@ app.get("/blog/:Bid?", (req, res) => {
               result: result,
               title: "|Blog|",
               des: "Logout",
-              back: "/images/blogs.jpg",
+              back: "/images/test.jpg",
               file: `/images/uploaded/${req.session.pic}`
             });
           }
@@ -833,7 +848,7 @@ app.get("/blog/:Bid?", (req, res) => {
               result: result,
               title: "|Blog|",
               des: "Log/Sign",
-              back: "/images/blogs.jpg",
+              back: "/images/test.jpg",
               file: `/images/uploaded/${req.session.pic}`
             });
           }
@@ -944,37 +959,31 @@ app.get("/edit/:Bid?", (req, res) => {
 
 app.post("/edited/:Bid?", (req, res) => {
   var sql = "SELECT * FROM catnav WHERE Bid=?";
+  var sql2 = "UPDATE catnav SET Heading=?,Paragraph=?,Category=? WHERE Bid=?";
   if (req.session.loggedin) {
     connection.query(sql, [req.params.Bid], (err, result) => {
-      console.log(req.session.user + " " + result[0].Id);
       if (err) {
         res.send("Blog Dosen't Exisit");
       } else {
-        if (req.session.user == result[0].Id) {
-          if (req.body.head && req.body.para && req.body.category) {
-            var sql2 =
-              "UPDATE catnav SET Heading=?,Paragraph=?,Category=? WHERE Bid=?";
-            connection.query(
-              sql2,
-              [req.body.head, req.body.para, req.body.category, req.params.Bid],
-              e => {
-                if (e) {
-                  res.send("Something went wrong");
-                } else {
-                  res.redirect("/myBlogs");
-                }
+        if (req.body.head && req.body.para && req.body.category) {
+          connection.query(
+            sql2,
+            [req.body.head, req.body.para, req.body.category, req.params.Bid],
+            e => {
+              if (e) {
+                res.send("Something went wrong");
+              } else {
+                res.redirect("/myBlogs");
               }
-            );
-          } else {
-            res.render("edit", {
-              des: "Logout",
-              result: result,
-              warn: "Fields Should not be empty",
-              file: `/images/uploaded/${req.session.pic}`
-            });
-          }
+            }
+          );
         } else {
-          res.send("You are Unauthorized here");
+          res.render("edit", {
+            des: "Logout",
+            result: result,
+            warn: "Fields Should not be empty",
+            file: `/images/uploaded/${req.session.pic}`
+          });
         }
       }
     });
@@ -1042,18 +1051,65 @@ app.post("/upload_pic", (req, res) => {
 
 app.get("/del_account", (req, res) => {
   if (req.session.user) {
-    var sql = "DELETE FROM silog WHERE Name=?";
-    connection.query(sql, req.session.user, err => {
+    res.render("del", { error: "" });
+  } else {
+    res.send("You are not Authorised here");
+  }
+});
+app.post("/del_account", (req, res) => {
+  var sqll = "SELECT * FROM silog WHERE Name= ? ";
+  var sql = "DELETE FROM silog WHERE Name=?";
+
+  connection.query(sqll, req.session.user, (e, result) => {
+    if (req.body.password == result[0].Password) {
+      connection.query(sql, req.session.user, err => {
+        if (err) {
+          res.send("Something went wrong");
+        } else {
+          req.session.loggedin = false;
+          req.session.pic = "";
+          res.redirect("/");
+        }
+      });
+    } else {
+      res.render("del", { error: "Incorrect Password" });
+    }
+  });
+});
+
+//SIGN THROUGH MAIL
+
+app.get("/Verify_mail", (req, res) => {
+  res.render("confirm_email", { error: "" });
+});
+app.post("/verified", (req, res) => {
+  if (req.body.text == inf[3]) {
+    var sql = "INSERT INTO silog(Name,Password,Email) VALUES(?,?,?)";
+    connection.query(sql, [inf[2], inf[1], inf[0]], (err, result, fields) => {
       if (err) {
-        res.send("Something went wrong");
+        res.render("silog", {
+          title: "|Log/Sign|" //ERROR IN DATABASE INSERTION
+        });
+        console.log("Error in Insertion");
       } else {
-        req.session.loggedin = false;
-        req.session.pic = "";
-        res.redirect("/");
+        var sql2 = "SELECT * FROM silog WHERE Email=?";
+
+        connection.query(sql2, [inf[0]], (error, resu) => {
+          if (error) {
+            throw error; //ERROR IN FINDING EMAIL
+          } else {
+            req.session.loggedin = true;
+            req.session.user = resu[0].Name;
+            req.session.id = resu[0].Id;
+            req.session.email = resu[0].Email;
+            req.session.Image = resu[0].Image;
+            res.redirect("/");
+          }
+        });
       }
     });
   } else {
-    res.send("You are not Authorised here");
+    res.render("confirm_email", { error: "Invalid Code" });
   }
 });
 

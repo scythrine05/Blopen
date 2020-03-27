@@ -25,7 +25,7 @@ body {
   margin: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  background: url(../images/Category.jpg);
+  background: rgb(21, 32, 43);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -34,13 +34,39 @@ body {
   flex-direction: column;
 }
 
+#look {
+  transition: 0.3s ease-in-out all;
+  cursor: pointer;
+  position: fixed;
+  right: 10%;
+  bottom: 10%;
+}
+
+#look:hover {
+  animation: move 0.3s ease-in-out forwards 0s infinite;
+}
+
+@keyframes move {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(1em);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
 header {
   width: 100%;
   height: 5em;
   padding: 20px 0px 20px 0;
   color: white;
   margin: 0;
-  background: rgba(65, 179, 163, 0.9);
+  background: rgba(65, 179, 163);
 }
 #icon {
   float: left;
@@ -222,6 +248,10 @@ nav ul li {
 }
 
 @media only screen and (max-width: 768px) {
+  body #look {
+    height: 40px;
+    width: 40px;
+  }
   header h1 {
     font-size: 40px;
     margin-top: 20px;
@@ -297,7 +327,8 @@ nav ul li {
     filter: blur(3px);
   }
   body .body a div {
-    height: 24em;
+    height: 20em;
+    width: 20em;
   }
   body .body .i1::before,
   body .body .i2::before,
@@ -308,6 +339,7 @@ nav ul li {
   body .body .i7::before {
     opacity: 1;
     font-size: 23px;
+    top: 6em;
   }
 }
 @media only screen and (max-width: 384px) {

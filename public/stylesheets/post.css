@@ -25,7 +25,7 @@ body {
   margin: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  background: url(../images/post.jpg);
+  background: rgb(21, 32, 43);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -40,7 +40,7 @@ header {
   padding: 20px 0px 20px 0;
   color: white;
   margin: 0;
-  background: rgba(65, 179, 163, 0.9);
+  background: rgba(65, 179, 163);
 }
 #icon {
   float: left;
@@ -324,6 +324,7 @@ nav ul li {
   border: 1px solid black;
   padding-left: 2px;
   padding-bottom: 20px;
+  border: 2px solid white;
 }
 @-moz-document url-prefix() {
   .post * {
@@ -366,6 +367,11 @@ nav ul li {
   height: 17px;
   width: 17px;
 }
+.post input[type="text"]::placeholder,
+textarea::placeholder {
+  color: darkgray;
+}
+
 .post input[type="text"] {
   width: 91%;
   background: rgba(245, 222, 179, 0.5);
@@ -373,9 +379,6 @@ nav ul li {
   border-right: none;
   border-top: none;
   border-bottom: none;
-}
-
-.post input[type="text"] {
   height: 5em;
   font-size: 17px;
   font-family: "Ubuntu";

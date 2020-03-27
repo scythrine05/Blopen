@@ -26,6 +26,31 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
 }
+#look {
+  transition: 0.3s ease-in-out all;
+  cursor: pointer;
+  position: fixed;
+  right: 10%;
+  bottom: 10%;
+}
+
+#look:hover {
+  animation: move 0.3s ease-in-out forwards 0s infinite;
+}
+
+@keyframes move {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(1em);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
 
 header {
   width: 100%;
@@ -33,7 +58,7 @@ header {
   padding: 20px 0px 20px 0;
   color: white;
   margin: 0;
-  background: rgba(65, 179, 163, 0.9);
+  background: rgba(65, 179, 163);
 }
 #icon {
   float: left;
@@ -216,6 +241,10 @@ nav ul li {
 }
 
 @media only screen and (max-width: 768px) {
+  body #look {
+    height: 40px;
+    width: 40px;
+  }
   header h1 {
     font-size: 40px;
     margin-top: 20px;
@@ -311,11 +340,6 @@ nav ul li {
     position: relative;
     top: -1em;
   }
-
-  #look {
-    position: relative;
-    top: 1em;
-  }
   .nav-box:checked ~ nav {
     width: 11em;
   }
@@ -336,7 +360,8 @@ nav ul li {
   text-align: center;
   display: flex;
   flex-direction: column;
-  background: rgba(108, 100, 139, 0.9);
+  background: rgba(108, 100, 139, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.95);
   margin-top: 10em;
   padding: 0px;
   white-space: normal;

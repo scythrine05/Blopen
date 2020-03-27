@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>|Veirfy_Email|</title>
+    <link rel="stylesheet" href="/stylesheets/del.css" type="text/css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Frijole&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Viga&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img
+        id="icon"
+        src="/images/icon.png"
+        height="50px"
+        width="50px"
+        alt="icon"
+      />
+      <h1>Bl<font color="#fba100">o</font>pen</h1>
+      <img src="/images/border.png" id="border" />
+    </header>
+    <div class="body">
+      <h1>Verification Code</h1>
+
+      <p id="err"><%= error %></p>
+      <form action="/verified" method="POST">
+        Code :<input
+          autocomplete="off"
+          name="text"
+          type="text"
+          id="password"
+          placeholder="Code"
+        />
+        <button type="submit" id="sub">Proceed</button>
+      </form>
+    </div>
+    <script>
+      //This is avoid Flickering
+    </script>
+    <footer></footer>
+  </body>
+</html>
