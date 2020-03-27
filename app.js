@@ -11,12 +11,13 @@ const session = require("express-session");
 const multer = require("multer");
 
 // CREATE A CONNECTION
+//b30de768ff88d7:9a431b69@us-cdbr-iron-east-01.cleardb.net/heroku_18b0797700c12ad?reconnect=true
 
-const connection = mysql.createConnection({
-  host: "localhost",
-  password: "",
-  user: "root",
-  database: "blopen",
+mysql: const connection = mysql.createConnection({
+  host: "us-cdbr-iron-east-01.cleardb.net",
+  password: "9a431b69",
+  user: "b30de768ff88d7",
+  database: "heroku_18b0797700c12ad",
   multipleStatements: true
 });
 
