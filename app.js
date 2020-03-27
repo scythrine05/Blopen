@@ -13,7 +13,7 @@ const multer = require("multer");
 // CREATE A CONNECTION
 //b30de768ff88d7:9a431b69@us-cdbr-iron-east-01.cleardb.net/heroku_18b0797700c12ad?reconnect=true
 
-mysql: var connection = mysql.createConnection({
+var connection = mysql.createPool({
   host: "us-cdbr-iron-east-01.cleardb.net",
   password: "9a431b69",
   user: "b30de768ff88d7",
@@ -70,9 +70,6 @@ connection.connect(err => {
   if (err) throw err;
   else console.log("Database Connected!");
 });
-
-const port = 5000;
-
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
@@ -1041,6 +1038,7 @@ app.post("/upload_pic", (req, res) => {
 });
 
 //SERVER
-app.listen(port, "0.0.0.0", () =>
-  console.log("Server is Running on port: " + port)
-);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
