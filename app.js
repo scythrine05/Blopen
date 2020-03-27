@@ -1038,6 +1038,25 @@ app.post("/upload_pic", (req, res) => {
   });
 });
 
+//DELETE ACCOUNT
+
+app.get("/del_account", (req, res) => {
+  if (req.session.user) {
+    var sql = "DELETE FROM silog WHERE Name=?";
+    connection.query(sql, req.session.user, err => {
+      if (err) {
+        res.send("Something went wrong");
+      } else {
+        req.session.loggedin = false;
+        req.session.pic = "";
+        res.redirect("/");
+      }
+    });
+  } else {
+    res.send("You are not Authorised here");
+  }
+});
+
 //SERVER
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
