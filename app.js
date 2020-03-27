@@ -3,8 +3,8 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-const { check, validationResult } = require("express-validator/check");
-const { matchedData, sanitized } = require("express-validator/filter");
+const { check, validationResult } = require("express-validator");
+const { matchedData, sanitized } = require("express-validator");
 const mysql = require("mysql");
 const ejs = require("ejs");
 const session = require("express-session");
