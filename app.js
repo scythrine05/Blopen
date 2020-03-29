@@ -867,12 +867,26 @@ app.get("/blog/:Bid?", (req, res) => {
 });
 //DELETE THE BLOG
 app.get("/delete/:Bid?", (req, res) => {
-  if (req.session.loggedin) {
-    var x = req.params.Bid;
-    res.render("del_blog", { error: "", x: x });
-  } else {
-    res.redirect("/");
-  }
+  var x = req.params.Bid;
+  var sql="SELECT * FROM catnav WHERE Bid=?";
+
+  connection.query(sql,[x],(e,r)=>{
+
+    if(r[0].Id.toUpperCase() == req.session.user.toUpperCase()){
+      if (req.session.loggedin) {
+
+        res.render("del_blog", { error: "", x: x });
+      } else {
+        res.redirect("/");
+      }
+
+    }
+    else{
+
+      res.send("You are not authorised");
+    }
+  })
+ 
 });
 
 app.post("/delete/:Bid?", (req, res) => {
