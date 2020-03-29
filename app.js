@@ -540,7 +540,7 @@ app.post(
     } else {
       var sq = "SELECT * FROM silog WHERE Name=? OR Email=?";
       connection.query(sq, [req.body.Sname, req.body.Semail], (e, r) => {
-        if (r[0].Email.length > 0) {
+        if (r[0].Email === req.body.Semail) {
           res.render("silog", {
             title: "|Log/Sign|",
             msg: "",
@@ -548,7 +548,7 @@ app.post(
             msg3: "Account Already Exist",
             msg4: "" // ACCOUNT ALREADY EXIST
           });
-        } else if (r[0].Name.length > 0) {
+        } else if (r[0].Name.toUpperCase() === req.body.Sname.toUpperCase()) {
           res.render("silog", {
             title: "|Log/Sign|",
             msg: "",
@@ -576,7 +576,7 @@ app.post(
                 msg: "",
                 msg2: "",
                 msg3: "Invalid Email",
-                msg4: "" // USERNAME ALREADY EXIST
+                msg4: ""
               });
             } else {
               inf = [
