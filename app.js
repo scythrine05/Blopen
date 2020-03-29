@@ -538,9 +538,17 @@ app.post(
       });
       console.log(errors.mapped().msg);
     } else {
-      var sq = "SELECT * FROM silog WHERE Name=?";
-      connection.query(sq, [req.body.Sname], (e, r) => {
-        if (r.length > 0) {
+      var sq = "SELECT * FROM silog WHERE Name=? OR Email=?";
+      connection.query(sq, [req.body.Sname, req.body.Semail], (e, r) => {
+        if (r[0].Email.length > 0) {
+          res.render("silog", {
+            title: "|Log/Sign|",
+            msg: "",
+            msg2: "",
+            msg3: "Account Already Exist",
+            msg4: "" // ACCOUNT ALREADY EXIST
+          });
+        } else if (r[0].Name.length > 0) {
           res.render("silog", {
             title: "|Log/Sign|",
             msg: "",
@@ -548,7 +556,6 @@ app.post(
             msg3: "Username Already Exist",
             msg4: "" // USERNAME ALREADY EXIST
           });
-          console.log("Username already Exist");
         } else {
           var mail = {
             from: "blopen.blogger@gmail.com",
