@@ -14,7 +14,6 @@ var inf;
 
 // CREATE A CONNECTION
 //b30de768ff88d7:9a431b69@us-cdbr-iron-east-01.cleardb.net/heroku_18b0797700c12ad?reconnect=true
-//mysql --host=us-cdbr-iron-east-01.cleardb.net --user=b30de768ff88d7 --password=9a431b69 --reconnect heroku_18b0797700c12ad
 
 var connection = mysql.createPool({
   host: "us-cdbr-iron-east-01.cleardb.net",
@@ -865,32 +864,35 @@ app.get("/blog/:Bid?", (req, res) => {
   });
 });
 //DELETE THE BLOG
-
 app.get("/delete/:Bid?", (req, res) => {
-  var sql = "SELECT * FROM catnav WHERE Bid=?";
   if (req.session.loggedin) {
-    connection.query(sql, [req.params.Bid], (err, result) => {
-      console.log(req.session.user + " " + result[0].Id);
-      if (err) {
-        res.send("Blog Dosen't Exisit");
-      } else {
-        if (req.session.user == result[0].Id) {
-          var sql2 = "DELETE FROM catnav WHERE Bid=?";
-          connection.query(sql2, [req.params.Bid], er => {
-            if (er) {
-              res.send("Blog Dosen't Exisit");
-            } else {
-              res.redirect("/myBlogs");
-            }
-          });
-        } else {
-          res.send("You are Unauthorized here");
-        }
-      }
-    });
+    var x = req.params.Bid;
+    res.render("del_blog", { error: "", x: x });
   } else {
-    res.send("You are Unauthorized here");
+    res.redirect("/");
   }
+});
+
+app.post("/delete/:Bid?", (req, res) => {
+  var sql3 = "SELECT * FROM silog WHERE Name=?";
+  connection.query(sql3, [req.session.user], (e, r) => {
+    if (e) {
+      res.send("User doesn't Exist");
+    } else {
+      if (req.body.password == r[0].Password) {
+        var sql2 = "DELETE FROM catnav WHERE Bid=?";
+        connection.query(sql2, [req.params.Bid], er => {
+          if (er) {
+            res.send("Blog Dosen't Exisit");
+          } else {
+            res.redirect("/myBlogs");
+          }
+        });
+      } else {
+        res.render("del_blog", { error: "Incorrect Password", x: "" });
+      }
+    }
+  });
 });
 //CATEGORY
 
