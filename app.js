@@ -539,22 +539,24 @@ app.post(
     } else {
       var sq = "SELECT * FROM silog WHERE Name=? OR Email=?";
       connection.query(sq, [req.body.Sname, req.body.Semail], (e, r) => {
-        if (r[0].Email === req.body.Semail) {
-          res.render("silog", {
-            title: "|Log/Sign|",
-            msg: "",
-            msg2: "",
-            msg3: "Account Already Exist",
-            msg4: "" // ACCOUNT ALREADY EXIST
-          });
-        } else if (r[0].Name.toUpperCase() === req.body.Sname.toUpperCase()) {
-          res.render("silog", {
-            title: "|Log/Sign|",
-            msg: "",
-            msg2: "",
-            msg3: "Username Already Exist",
-            msg4: "" // USERNAME ALREADY EXIST
-          });
+        if (r.length > 0) {
+          if (r[0].Email === req.body.Semail) {
+            res.render("silog", {
+              title: "|Log/Sign|",
+              msg: "",
+              msg2: "",
+              msg3: "Account Already Exist",
+              msg4: "" // ACCOUNT ALREADY EXIST
+            });
+          } else if (r[0].Name.toUpperCase() === req.body.Sname.toUpperCase()) {
+            res.render("silog", {
+              title: "|Log/Sign|",
+              msg: "",
+              msg2: "",
+              msg3: "Username Already Exist",
+              msg4: "" // USERNAME ALREADY EXIST
+            });
+          }
         } else {
           var mail = {
             from: "blopen.blogger@gmail.com",
@@ -874,14 +876,18 @@ app.get("/delete/:Bid?", (req, res) => {
 });
 
 app.post("/delete/:Bid?", (req, res) => {
+  var y = req.params.Bid;
+  console.log(y);
   var sql3 = "SELECT * FROM silog WHERE Name=?";
   connection.query(sql3, [req.session.user], (e, r) => {
     if (e) {
       res.send("User doesn't Exist");
     } else {
       if (req.body.password == r[0].Password) {
+        console.log("1");
         var sql2 = "DELETE FROM catnav WHERE Bid=?";
-        connection.query(sql2, [req.params.Bid], er => {
+        connection.query(sql2, [y], er => {
+          console.log("2");
           if (er) {
             res.send("Blog Dosen't Exisit");
           } else {
@@ -889,7 +895,7 @@ app.post("/delete/:Bid?", (req, res) => {
           }
         });
       } else {
-        res.render("del_blog", { error: "Incorrect Password", x: "" });
+        res.render("del_blog", { error: "Incorrect Password", x: y });
       }
     }
   });
