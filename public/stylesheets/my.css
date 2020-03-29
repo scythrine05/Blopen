@@ -281,7 +281,7 @@ nav ul li {
     display: none;
   }
   #border {
-    margin-top: -1.1em;
+    margin-top: -1.2em;
   }
   #border2 {
     left: -58em;
@@ -321,7 +321,7 @@ nav ul li {
   body .body {
     border-radius: 0% 8% 0% 8%;
     width: 100%;
-    height: 34em;
+    height: 40em;
   }
 
   #greet {
@@ -348,11 +348,13 @@ nav ul li {
   }
   .blogs .view h3 {
     opacity: 1;
+    font-size: 16px;
   }
 
   .blogs .view {
-    width: 28em;
+    width: 29em;
     margin-bottom: 3em;
+    box-shadow: inset 1px 1px 30px black;
   }
   body .blogs #border3 {
     display: none;
@@ -372,7 +374,7 @@ nav ul li {
     top: -1em;
   }
   .nav-box:checked ~ nav {
-    width: 11em;
+    width: 11.5em;
   }
 
   nav ul {
@@ -401,7 +403,7 @@ nav ul li {
 .body {
   width: 60em;
   align-self: center;
-  height: 37em;
+  height: 41em;
   font-family: "vkts";
   color: white;
   text-align: center;

@@ -365,6 +365,7 @@ nav ul li {
   margin-top: 10em;
   padding: 0px;
   white-space: normal;
+  overflow: hidden;
 }
 
 .body h1 {
@@ -386,10 +387,13 @@ nav ul li {
   text-shadow: 1px 1px black;
 }
 
-.body p {
+.body pre {
   font-family: "Ubuntu";
   font-size: 22px;
   text-shadow: 1px 1px black;
-  line-height: 2em;
+  overflow-x: hidden;
   letter-spacing: 1px;
+  white-space: pre-wrap;
+  width: 96%;
+  margin-left: 10px;
 }

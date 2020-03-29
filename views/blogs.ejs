@@ -107,18 +107,18 @@
         <%= result[0].Day %> <%= result[0].Month %> <%= result[0].Year %>
       </h3>
       <h1 id="head"><%= result[0].Heading %></h1>
-      <p id="para">
+      <pre id="para">
         <%= result[0].Paragraph %>
-      </p>
+      </pre>
     </div>
 
     <% } else { %>
 
     <div class="body">
       <h1>Nothing</h1>
-      <p>
+      <pre>
         This Blog is Empty
-      </p>
+      </pre>
     </div>
     <% } %>
 
