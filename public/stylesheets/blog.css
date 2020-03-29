@@ -107,7 +107,8 @@ header h1 {
 }
 #guestx {
   margin-left: 3em;
-  margin-top: 5em;
+  position:relative;
+   top:4em;
 }
 #guest:hover {
   transform: rotateY(0deg);
@@ -313,7 +314,9 @@ nav ul li {
     height: 50px;
     width: 50px;
     align-self: center;
-    margin: 2em 0 0.8em 0;
+    margin: 1em 0 0.8em 0;
+
+top:0em;
   }
 
   #head {
@@ -357,7 +360,6 @@ nav ul li {
   width: 100%;
   min-height: 50em;
   color: white;
-  text-align: center;
   display: flex;
   flex-direction: column;
   background: rgba(108, 100, 139, 0.95);
@@ -370,15 +372,17 @@ nav ul li {
 
 .body h1 {
   font-family: "Ubuntu";
-  font-size: 50px;
+  font-size: 35px;
   text-shadow: 2px 2px black;
+  text-align: center;
 }
 
 .body h2 {
   font-family: "Ubuntu";
   align-self: flex-start;
-  margin-left: 2.1em;
+  margin-left: 8em;
   text-shadow: 1px 1px black;
+  font-size:20px;
 }
 .body h3 {
   font-family: "Ubuntu";
@@ -389,7 +393,7 @@ nav ul li {
 
 .body pre {
   font-family: "Ubuntu";
-  font-size: 22px;
+  font-size: 19px;
   text-shadow: 1px 1px black;
   overflow-x: hidden;
   letter-spacing: 1px;
