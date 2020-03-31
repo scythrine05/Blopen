@@ -107,8 +107,8 @@ header h1 {
 }
 #guestx {
   margin-left: 3em;
-  position:relative;
-   top:4em;
+  position: relative;
+  top: 4em;
 }
 #guest:hover {
   transform: rotateY(0deg);
@@ -239,6 +239,9 @@ nav ul li {
     position: relative;
     top: -11px;
   }
+  body {
+    background-attachment: scroll;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -316,7 +319,7 @@ nav ul li {
     align-self: center;
     margin: 1em 0 0.8em 0;
 
-top:0em;
+    top: 0em;
   }
 
   #head {
@@ -382,7 +385,7 @@ top:0em;
   align-self: flex-start;
   margin-left: 8em;
   text-shadow: 1px 1px black;
-  font-size:20px;
+  font-size: 20px;
 }
 .body h3 {
   font-family: "Ubuntu";
