@@ -868,51 +868,48 @@ app.get("/blog/:Bid?", (req, res) => {
 //DELETE THE BLOG
 app.get("/delete/:Bid?", (req, res) => {
   var x = req.params.Bid;
-  var sql="SELECT * FROM catnav WHERE Bid=?";
+  var sql = "SELECT * FROM catnav WHERE Bid=?";
 
-  connection.query(sql,[x],(e,r)=>{
-
-    if(r[0].Id.toUpperCase() == req.session.user.toUpperCase()){
+  connection.query(sql, [x], (e, r) => {
+    if (r[0].Id.toUpperCase() == req.session.user.toUpperCase()) {
       if (req.session.loggedin) {
-
         res.render("del_blog", { error: "", x: x });
       } else {
         res.redirect("/");
       }
-
-    }
-    else{
-
+    } else {
       res.send("You are not authorised");
     }
-  })
- 
+  });
 });
 
 app.post("/delete/:Bid?", (req, res) => {
   var y = req.params.Bid;
-  console.log(y);
   var sql3 = "SELECT * FROM silog WHERE Name=?";
-  connection.query(sql3, [req.session.user], (e, r) => {
-    if (e) {
-      res.send("User doesn't Exist");
-    } else {
-      if (req.body.password == r[0].Password) {
-        console.log("1");
-        var sql2 = "DELETE FROM catnav WHERE Bid=?";
-        connection.query(sql2, [y], er => {
-          console.log("2");
-          if (er) {
-            res.send("Blog Dosen't Exisit");
-          } else {
-            res.redirect("/myBlogs");
-          }
-        });
+  if (req.session.loggedin) {
+    connection.query(sql3, [req.session.user], (e, r) => {
+      if (e) {
+        res.send("User doesn't Exist");
       } else {
-        res.render("del_blog", { error: "Incorrect Password", x: y });
+        if (req.body.password == r[0].Password) {
+          console.log("1");
+          var sql2 = "DELETE FROM catnav WHERE Bid=?";
+          connection.query(sql2, [y], er => {
+            console.log("2");
+            if (er) {
+              res.send("Blog Dosen't Exisit");
+            } else {
+              res.redirect("/myBlogs");
+            }
+          });
+        } else {
+          res.render("del_blog", { error: "Incorrect Password", x: y });
+        }
       }
-    }
-  });
+    });
+  } else {
+    res.send("You are not authorized here");
+  }
 });
 //CATEGORY
 
