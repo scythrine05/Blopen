@@ -1,3 +1,12 @@
+/*
+
+NOT REQUIRED NOR EXPORTED OTHER CUSTOM MODULES JUST CONJESTED ALL CODE IN HERE
+
+
+FIRST PROJECT :)
+
+*/
+
 //REQUIRE OF ALL MODULES
 
 const express = require("express");
@@ -866,6 +875,10 @@ app.get("/blog/:Bid?", (req, res) => {
   });
 });
 //DELETE THE BLOG
+
+app.get("/delete", (req, res) => {
+  res.send("You are not authorized here");
+});
 app.get("/delete/:Bid?", (req, res) => {
   var x = req.params.Bid;
   if (req.session.loggedin) {
@@ -956,6 +969,10 @@ app.get("/category", (req, res) => {
 });
 
 //EDIT THE BLOG
+
+app.get("/edit", (req, res) => {
+  res.send("You are not authorized here");
+});
 
 app.get("/edit/:Bid?", (req, res) => {
   var sql = "SELECT * FROM catnav WHERE Bid=?";
