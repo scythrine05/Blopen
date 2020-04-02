@@ -390,12 +390,14 @@ nav ul li {
   font-size: 17px;
   margin: 0em 3em 2em 3em;
   padding: 1em;
-  border: 2px solid wheat;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  border: 2px solid #e8a87c;
   transition: 0.3s all ease-in-out;
   text-shadow: 1px 1px black;
   font-weight: bold;
   letter-spacing: 0.6px;
 }
 .opt a span:hover {
-  box-shadow: inset -55px 55px wheat;
+  box-shadow: inset -100px 100px #e8a87c;
 }

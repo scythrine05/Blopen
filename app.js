@@ -261,7 +261,7 @@ app.get("/category/commerce", (req, res) => {
       if (req.session.loggedin) {
         res.render("index", {
           result: result,
-          title: "|COMMERCE|",
+          title: "|Commerce|",
           user: "Make ",
           user2: "Money", // HOME
           back: "/images/commerce2.jpg",
@@ -274,7 +274,7 @@ app.get("/category/commerce", (req, res) => {
       } else {
         res.render("index", {
           result: result,
-          title: "|COMMERCE|",
+          title: "|Commerce|",
           user: "Make ",
           user2: "Money",
           back: "/images/commerce2.jpg",
@@ -877,7 +877,7 @@ app.get("/blog/:Bid?", (req, res) => {
 //DELETE THE BLOG
 
 app.get("/delete", (req, res) => {
-  res.send("You are not authorized here");
+  res.render("404");
 });
 app.get("/delete/:Bid?", (req, res) => {
   var x = req.params.Bid;
@@ -892,11 +892,11 @@ app.get("/delete/:Bid?", (req, res) => {
           res.redirect("/");
         }
       } else {
-        res.send("You are not authorised");
+        res.render("404");
       }
     });
   } else {
-    res.send("You are not authorized here");
+    res.render("404");
   }
 });
 
@@ -971,7 +971,7 @@ app.get("/category", (req, res) => {
 //EDIT THE BLOG
 
 app.get("/edit", (req, res) => {
-  res.send("You are not authorized here");
+  res.render("404");
 });
 
 app.get("/edit/:Bid?", (req, res) => {
@@ -990,12 +990,12 @@ app.get("/edit/:Bid?", (req, res) => {
             file: `/images/uploaded/${req.session.pic}`
           });
         } else {
-          res.send("You are Unauthorized here");
+          res.render("404");
         }
       }
     });
   } else {
-    res.send("You are Unauthorized here");
+    res.render("404");
   }
 });
 
@@ -1007,7 +1007,7 @@ app.post("/edited/:Bid?", (req, res) => {
   if (req.session.loggedin) {
     connection.query(sql, [req.params.Bid], (err, result) => {
       if (err) {
-        res.send("Blog Dosen't Exisit");
+        res.render("404");
       } else {
         if (req.body.head && req.body.para && req.body.category) {
           connection.query(
@@ -1032,7 +1032,7 @@ app.post("/edited/:Bid?", (req, res) => {
       }
     });
   } else {
-    res.send("You are Unauthorized here");
+    res.render("404");
   }
 });
 //PROFILE
@@ -1097,7 +1097,7 @@ app.get("/del_account", (req, res) => {
   if (req.session.user) {
     res.render("del", { error: "" });
   } else {
-    res.send("You are not Authorised here");
+    res.render("404");
   }
 });
 app.post("/del_account", (req, res) => {
